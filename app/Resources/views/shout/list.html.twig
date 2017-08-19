@@ -87,10 +87,40 @@
                 </form>
             </div>
 
+            {% for shout in shouts %}
+                <div class="mb-3"></div>
+                <div class="card card-danger">
+                    <div class="card-header">
+                        {#<div class="card-avatar">#}
+                        {#<img class="img-circle" height="64px" width="64px" src="{{ asset('assets/img/antoine-barres.jpg') }}" alt="">#}
+                        {#</div>#}
+                        <h3 class="card-title">{{ shout.title }}</h3>
+                        <p style="margin-top: -10px">by <a href="">Juan</a></p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <h5><span class="label label-info"><i class="fa fa-bullhorn"></i>2.5k</span></h5>
+                            </li>
+                            <li class="list-inline-item">
+                                <h5><span class="label label-danger"><i class="fa fa-heart"></i>2.5k</span></h5>
+                            </li>
+                            <li class="list-inline-item">
+                                <h5><span class="label label-warning"><i class="fa fa-comment"></i>2.5k</span></h5>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="card-block">
+                        {{ shout.body|slice(0,300) }}...
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-outline-primary btn-round" href="">View more</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
             <div class="mb-3"></div>
             <div class="card card-danger">
                 <div class="card-header">
-
                     {#<div class="card-avatar">#}
                         {#<img class="img-circle" height="64px" width="64px" src="{{ asset('assets/img/antoine-barres.jpg') }}" alt="">#}
                     {#</div>#}

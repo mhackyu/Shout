@@ -1,0 +1,48 @@
+{% extends 'layouts/signin_signup_base.html.twig' %}
+
+{% block content %}
+    <nav class="navbar navbar-toggleable-md fixed-top navbar-transparent">
+        <div class="container">
+            <div class="navbar-translate">
+                <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Shout!</a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="page-header" style="background-image: url('{{ asset('assets/img/login-image.jpg') }}');">
+            <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
+                        <div class="card card-register">
+                            <h3 class="title">Welcome</h3>
+
+                            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                                <button type="submit" class="btn btn-danger btn-block btn-round">Register</button>
+                            {{ form_end(form) }}
+
+                            {#<form action="{{ path('login') }}" class="register-form" method="post">#}
+                                {#<label for="username">Username</label>#}
+                                {#<input type="text" class="form-control" id="username" name="_username" placeholder="Email" value="{{ last_username }}">#}
+
+                                {#<label for="password">Password</label>#}
+                                {#<input type="password" class="form-control" id="password" name="_password" placeholder="Password">#}
+                                {#<button type="submit" class="btn btn-danger btn-block btn-round">Login</button>#}
+                            {#</form>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="footer register-footer text-center">
+                    <h6>&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by Shout</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

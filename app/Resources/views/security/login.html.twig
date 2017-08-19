@@ -1,0 +1,55 @@
+{% extends 'layouts/signin_signup_base.html.twig' %}
+
+{% block content %}
+    <nav class="navbar navbar-toggleable-md fixed-top navbar-transparent">
+        <div class="container">
+            <div class="navbar-translate">
+                <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Shout!</a>
+            </div>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <div class="page-header" style="background-image: url('{{ asset('assets/img/login-image.jpg') }}');">
+            <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
+                        <div class="card card-register">
+                            <h3 class="title">Welcome</h3>
+
+                            {% if error %}
+                                <div class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;
+                                    </button>
+                                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                                </div>
+                            {% endif %}
+
+                            <form action="{{ path('login') }}" class="register-form" method="post">
+                                <label for="username">Username or Email</label>
+                                <input type="text" class="form-control" id="username" name="_username" placeholder="Username or Email" value="{{ last_username }}">
+
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+                                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                                <button type="submit" class="btn btn-danger btn-block btn-round">Login</button>
+                                <a href="{{ path('registration') }}" class="btn btn-default btn-block btn-round mt-2">Register</a>
+                            </form>
+                            <div class="forgot">
+                                <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer register-footer text-center">
+                    <h6>&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by Shout</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

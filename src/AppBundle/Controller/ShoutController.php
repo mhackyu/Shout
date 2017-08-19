@@ -9,10 +9,16 @@ class ShoutController extends Controller
 {
 
     /**
-     * @Route("/shouts", name="shout_list")
+     * @Route("/shout", name="shout_list")
      */
     public function listAction()
     {
-        return $this->render('shout/list.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $shouts = $em->getRepository('AppBundle:Shout')->findAll();
+
+        return $this->render('shout/list.html.twig', [
+            'shouts' => $shouts
+        ]);
     }
+
 }
