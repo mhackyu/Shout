@@ -36,8 +36,10 @@ class RegistrationController extends Controller
             $em->persist($user);
             $em->flush();
 
+            $this->addFlash('success', 'Successfully registered!');
             return $this->redirectToRoute('login');
         }
+
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView()
         ]);

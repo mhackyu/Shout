@@ -10,4 +10,13 @@ namespace AppBundle\Repository;
  */
 class ShoutRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function shouts()
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+              SELECT u FROM AppBundle:Shout u
+              ORDER BY u.createdAt DESC  
+            ')
+            ->getResult();
+    }
 }

@@ -12,6 +12,7 @@
 namespace AppBundle\Entity;
 
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -39,8 +40,6 @@ class User implements UserInterface, \Serializable
     private $username;
     /**
      * @ORM\Column(type="string", length=64)
-     * @Assert\NotBlank()
-     * @Assert\Length(min="6", max=20)
      */
     private $password;
     /**
@@ -56,6 +55,7 @@ class User implements UserInterface, \Serializable
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
+     * @Assert\Length(min=6, max=20)
      */
     private $plainPassword;
 
@@ -64,9 +64,20 @@ class User implements UserInterface, \Serializable
      */
     private $role;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Shout", mappedBy="user")
+     */
+    private $shout;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Love", mappedBy="user")
+     */
+    private $love;
+
     public function __construct()
     {
         $this->isActive = true;
+        $this->shout = new ArrayCollection();
 // may not be needed, see section on salt below
 // $this->salt = md5(uniqid(null, true));
     }
@@ -219,5 +230,37 @@ class User implements UserInterface, \Serializable
     public function setPlainPassword($plainPassword)
     {
         $this->plainPassword = $plainPassword;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShout()
+    {
+        return $this->shout;
+    }
+
+    /**
+     * @param mixed $shout
+     */
+    public function setShout($shout)
+    {
+        $this->shout = $shout;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLove()
+    {
+        return $this->love;
+    }
+
+    /**
+     * @param mixed $love
+     */
+    public function setLove($love)
+    {
+        $this->love = $love;
     }
 }

@@ -21,21 +21,13 @@
                     <div class="col-lg-4 offset-lg-4 col-sm-6 offset-sm-3">
                         <div class="card card-register">
                             <h3 class="title">Welcome</h3>
-
+                            {# FLASH MESSAGE #}
+                            {% include 'layouts/flash_message.html.twig' %}
                             {% form_theme form 'bootstrap_3_layout.html.twig' %}
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
                                 <button type="submit" class="btn btn-danger btn-block btn-round">Register</button>
                             {{ form_end(form) }}
-
-                            {#<form action="{{ path('login') }}" class="register-form" method="post">#}
-                                {#<label for="username">Username</label>#}
-                                {#<input type="text" class="form-control" id="username" name="_username" placeholder="Email" value="{{ last_username }}">#}
-
-                                {#<label for="password">Password</label>#}
-                                {#<input type="password" class="form-control" id="password" name="_password" placeholder="Password">#}
-                                {#<button type="submit" class="btn btn-danger btn-block btn-round">Login</button>#}
-                            {#</form>#}
                         </div>
                     </div>
                 </div>

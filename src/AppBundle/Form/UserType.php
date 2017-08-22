@@ -20,16 +20,20 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('username', TextType::class)
+            ->add('username', TextType::class, [
+                'label_attr' => [
+                    'class' => 'mt-0'
+                ]
+            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password']
-            ])
-            ->add('termsAccepted', CheckboxType::class, array(
-                'mapped' => false,
-                'constraints' => new IsTrue(),
-            ));
+                'first_options' => ['label' => 'Password', 'label_attr' => ['class' => 'mt-0']],
+                'second_options' => ['label' => 'Repeat Password', 'label_attr' => ['class' => 'mt-0']],
+            ]);
+//            ->add('termsAccepted', CheckboxType::class, array(
+//                'mapped' => false,
+//                'constraints' => new IsTrue(),
+//            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

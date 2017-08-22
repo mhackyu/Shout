@@ -30,10 +30,12 @@
                                 </div>
                             {% endif %}
 
+                            {# FLASH MESSAGE #}
+                            {% include 'layouts/flash_message.html.twig' %}
+
                             <form action="{{ path('login') }}" class="register-form" method="post">
                                 <label for="username">Username or Email</label>
                                 <input type="text" class="form-control" id="username" name="_username" placeholder="Username or Email" value="{{ last_username }}">
-
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">

@@ -33,3 +33,10 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+#    app.twig.isLove_extension:
+#        class: 'AppBundle\Twig\Extension\LoveExtension'
+#        public: false
+#        arguments: ["@doctrine"]
+#        tags:
+#            - { name: twig.extension }
