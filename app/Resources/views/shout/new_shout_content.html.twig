@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+    <form class="p-3" action="" method="post" role="form">
+        <div class="panel-heading">
+            <h2 class="text-center">Shout your problem</h2>
+        </div>
+
+        <div class="panel-body clearfix">
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            {{ form_start(form, {attr: {novalidate:'novalidate'}}) }}
+            {{ form_widget(form) }}
+            <div class="pull-right">
+                <button type="submit" class="btn btn-danger btn-sm">Shout</button>
+            </div>
+            {{ form_end(form) }}
+        </div>
+    </form>
+</div>

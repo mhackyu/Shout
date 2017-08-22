@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="row" style="margin-top: 100px">
+        <div class="col-md-6">
+            <legend>New Shout</legend>
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-danger">Shout</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

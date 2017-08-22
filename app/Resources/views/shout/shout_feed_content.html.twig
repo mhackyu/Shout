@@ -1,0 +1,58 @@
+<h4 class="mt-5">Shout Feed</h4>
+<hr>
+{% for shout in shouts %}
+    <div class="mb-3"></div>
+    <div class="card card-danger">
+        <div class="card-header">
+            {% set user = shout.user.username %}
+            {% set bodyLength = shout.body|length %}
+            <h3 class="card-title">{{ shout.title }} </h3>
+            <p style="margin-top: -10px"> by
+                <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/antoine-barres.jpg') }}" alt="">
+                <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>
+                <i class="small">{{ shout.createdAt|date() }}</i>
+            </p>
+            <ul class="list-inline">
+                <li class="list-inline-item">
+                    <h5><span class="label label-info"><i class="fa fa-bullhorn"></i>2.5k</span></h5>
+                </li>
+                <li class="list-inline-item">
+                    <h5><span class="label label-danger"><i class="fa fa-heart"></i><span id="love-count-{{ shout.slug }}">{{ shout|numOfLove() }}</span></span></h5>
+                </li>
+                <li class="list-inline-item">
+                    <h5><span class="label label-warning"><i class="fa fa-comment"></i>2.5k</span></h5>
+                </li>
+            </ul>
+        </div>
+        <div class="card-block">
+            {% if bodyLength > 300 %}
+                {{ shout.body|slice(0,300) }}...
+            {% else %}
+                {{ shout.body }}
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <div class="pull-left">
+                {#<span class="btn {% if app.user|isLove(shout) %}btn-primary{% else %} btn-outline-primary {% endif %} btn-sm"><i class="fa fa-bullhorn"></i>Loud</span>#}
+                {#{% set isLove = false %}#}
+                {#<span class="btn#}
+                {#{% if app.user|isLove(shout) %}#}
+                    {#btn-danger {% set isLove = true %}#}
+                {#{% else %}#}
+                    {#btn-outline-danger {% set isLove = false %}#}
+                {#{% endif %} btn-sm btn-love" data-id="{{ shout.slug }}" data-is-love="{{ isLove }}"><i class="fa fa-heart"></i>Love</span>#}
+                {% set slug = shout.slug %}
+                {% if app.user|isLove(shout) %}
+                    {#<span class="btn btn-primary btn-sm"><i class="fa fa-bullhorn"></i>Loud</span>#}
+                    <span class="btn btn-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>
+                {% else %}
+                    {#<span class="btn btn-outline-primary btn-sm"><i class="fa fa-bullhorn"></i>Loud</span>#}
+                    <span class="btn btn-outline-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart" title="love this"></i> Love</span>
+                {% endif %}
+            </div>
+            <div class="pull-right">
+                <button class="btn btn-outline-primary btn-round" href="">Advice</button>
+            </div>
+        </div>
+    </div>
+{% endfor %}
