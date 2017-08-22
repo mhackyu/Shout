@@ -74,21 +74,8 @@ class ShoutController extends Controller
      */
     public function showAction(Shout $shout)
     {
-        dump($shout);die;
-    }
-
-    /**
-     * @Route("/love/{slug}")
-     */
-    public function loveAction(Shout $shout)
-    {
-//        dump($this->get('app.twig.isLove_extension')->isLoveFilter($this->getUser(), $shout));die;
-//        $love = new Love();
-//        $love->setShout($shout);
-//        $love->setUser($this->getUser());
-//        $em = $this->getDoctrine()->getManager();
-//        $em->persist($love);
-//        $em->flush();
-        dump($shout->getLove()[0]);die;
+        return $this->render('shout/show.html.twig', [
+            'shout' => $shout
+        ]);
     }
 }

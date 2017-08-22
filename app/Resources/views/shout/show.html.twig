@@ -1,0 +1,117 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% set slug = shout.slug %}
+    {% set user = shout.user.username %}
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 bg-faded">
+            <div class="panel panel-default">
+                <form class="p-3" action="" method="post" role="form">
+                    <div class="panel-heading">
+                        <h3 class="text-center">"{{ shout.title }}"</h3>
+                        <p class="text-center mt-0" style="margin-top: -10px"> by
+                            <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">
+                            <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>
+                            <i class="small">{{ shout.createdAt|date() }}</i>
+                        </p>
+                        <hr>
+                    </div>
+                    <div class="panel-body clearfix">
+                        <p>{{ shout.body }}</p>
+                    </div>
+                    <hr>
+                    <div class="panel-footer">
+                        <div class="text-center">
+                            {% if app.user|isLove(shout) %}
+                                <span class="btn btn-primary"><i class="fa fa-bullhorn"></i>Loud</span>
+                                <span class="btn btn-danger btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>
+                            {% else %}
+                                <span class="btn btn-outline-primary "><i class="fa fa-bullhorn"></i>Loud</span>
+                                <span class="btn btn-outline-danger btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart" title="love this"></i> Love</span>
+                            {% endif %}
+                        </div>
+                        <hr>
+                        <div class="media">
+                            <a class="media-left mr-2" href="#">
+                                <img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-2.jpg') }}" style="width: 64px; height: 64px;">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>
+                                <div class="mt-2">
+                                    <textarea type="text" class="form-control" id="" placeholder="Please be nice with your advice :)" style="height: 80px"></textarea>
+                                </div>
+                                <div class="pull-right mt-2">
+                                    <button type="submit" class="btn btn-default">post</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <h5><b>Advices(283)</b></h5>
+                    <div class="media">
+                        <a class="media-left mr-2" href="#">
+                            <img class="img-rounded" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 64px; height: 64px;">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a class="" href="">Jen</a></h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                            sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                            Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+                            faucibus.
+                            <div>
+                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media">
+                        <a class="media-left mr-2" href="#">
+                            <img class="img-rounded" src="{{ asset('assets/img/faces/ayo-ogunseinde-2.jpg') }}" style="width: 64px; height: 64px;">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a class="" href="">Ogunseunde</a></h4>
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi explicabo facilis in maxime, mollitia obcaecati reiciendis sequi velit? A aliquid aperiam architecto aut consequuntur deserunt ipsam officia placeat sunt voluptatum?
+                            <div>
+                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media">
+                        <a class="media-left mr-2" href="#">
+                            <img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-3.jpg') }}" style="width: 64px; height: 64px;">
+                        </a>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a class="" href="">clem</a></h4>
+                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
+                            sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+                            Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
+                            faucibus.
+                            <div>
+                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3"><a href="">View more advice</a></div>
+
+            </div>
+
+        </div>
+        </form>
+    </div>
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{{ asset('assets/app/js/reaction.js') }}"></script>
+{% endblock %}
+
+

@@ -10,6 +10,11 @@ namespace AppBundle\Repository;
  */
 class ShoutRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Get all shouts except of the current user
+     * @param $user
+     * @return array
+     */
     public function shouts()
     {
         return $this->getEntityManager()

@@ -1,9 +1,10 @@
 $(document).ready( function () {
-
+//Todo: BUG WHEN USER GOES BACK FROM SHOWACTION. CSS GOES BACK TO DEFAULT RENDERED IN TWIG.
     // love reaction.
     $('.btn-love').on('click', function (e) {
         var id = $(this).data('id');
         var isLove = $(this).data('is-love');
+        // var isLove = $(this).attr('data-is-love');
         var loveCount = parseInt($('#love-count-' + id).text());
         var addLoveUrl = "/love/" + id + '/add';
         var removeLoveUrl = "/love/" + id + '/remove';
@@ -19,6 +20,7 @@ $(document).ready( function () {
                 url: removeLoveUrl,
                 method: "GET",
                 success: function (data) {
+                    // alert(data);
                     $('#love-count-' + id).text(loveCount-1);
                 },
                 error: function () {
@@ -35,6 +37,7 @@ $(document).ready( function () {
                 url: addLoveUrl,
                 method: "GET",
                 success: function (data) {
+                    // alert(data);
                     $('#love-count-' + id).text(loveCount+1);
                 },
                 error: function () {
@@ -42,7 +45,10 @@ $(document).ready( function () {
                 }
             });
         }
+        $(this).removeClass('animated bounceIn');
+        $(this).addClass('animated bounceIn');
         // update data-is-love value.
         $(this).data('is-love',!isLove);
+        // $(this).attr('data-is-love', !isLove);
     });
 });
