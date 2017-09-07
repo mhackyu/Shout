@@ -1,0 +1,22 @@
+{#<div class="mt-5"></div>#}
+<div class="panel panel-default mt-5">
+    <div class="panel-heading">
+        <h5 class="panel-title"><strong>Loudest Shouts of the week</strong></h5>
+    </div>
+    <div class="panel-content">
+        <div class="list-group">
+            {% for key, shout in topShouts %}
+                <a href="{{ path('shout_show', {slug: shout['slug']}) }}" class="list-unstyled">
+                    {{ key+1 }}.
+                    {% if shout['title']|length > 16 %}
+                        {{ shout['title']|slice(0, 16) }}...
+                    {% else %}
+                        {{ shout['title'] }}
+                    {% endif %}
+                    <span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ shout['cnt']|number_format }}</span>
+                    {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ shout['cnt']|number_format }}</span></div>#}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

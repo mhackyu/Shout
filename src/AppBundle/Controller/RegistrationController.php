@@ -29,6 +29,8 @@ class RegistrationController extends Controller
 
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
+//        $form->remove('avatar');
+//        $form->remove('about');
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

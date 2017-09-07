@@ -1,0 +1,8 @@
+.fixed {
+    position: fixed;
+    width: 25%;
+}
+.scrollit {
+    float: left;
+    width: 71%
+}

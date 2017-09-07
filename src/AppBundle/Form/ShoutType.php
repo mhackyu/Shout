@@ -18,13 +18,13 @@ class ShoutType extends AbstractType
         $builder
             ->add('title',TextType::class, [
                 'attr' => [
-                    'placeholder' => 'Think of a catchy title'
+                    'placeholder' => 'Make it short and catchy'
                 ]
             ])
             ->add('body', TextareaType::class, [
                 'label' => 'Content',
                 'attr' => [
-                    'placeholder' => 'What\'s your problem?',
+                    'placeholder' => 'What you want to shout?',
                     'style' => 'height: 150px'
                 ]
             ]);

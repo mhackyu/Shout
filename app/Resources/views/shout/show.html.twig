@@ -4,12 +4,12 @@
     {% set slug = shout.slug %}
     {% set user = shout.user.username %}
     <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6 bg-faded">
+        {#<div class="col-md-3"></div>#}
+        <div class="col-md-12 bg-faded">
             <div class="panel panel-default">
                 <form class="p-3" action="" method="post" role="form">
                     <div class="panel-heading">
-                        <h3 class="text-center">"{{ shout.title }}"</h3>
+                        <h4 class="text-center">"{{ shout.title }}"</h4>
                         <p class="text-center mt-0" style="margin-top: -10px"> by
                             <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">
                             <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>

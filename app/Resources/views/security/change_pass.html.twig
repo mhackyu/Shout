@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6 offset-3 mt-5 mb-5">
+            <legend>Change Password</legend>
+            {% form_theme form 'bootstrap_3_layout.html.twig' %}
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button type="submit" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i> Update Password</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

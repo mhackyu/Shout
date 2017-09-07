@@ -8,22 +8,20 @@ use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class ProfileFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('email', EmailType::class, [
-                'attr' => [
-                    'placeholder' => 'email@domain.com'
-                ]
+            'attr' => [
+                'placeholder' => 'email@domain.com'
+            ]
             ])
             ->add('username', TextType::class, [
                 'label_attr' => [
@@ -32,11 +30,6 @@ class UserType extends AbstractType
                 'attr' => [
                     'placeholder' => 'username'
                 ]
-            ])
-            ->add('plainPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'first_options' => ['label' => 'Password', 'label_attr' => ['class' => 'mt-0'], 'attr' => ['placeholder' => 'password']],
-                'second_options' => ['label' => 'Repeat Password', 'label_attr' => ['class' => 'mt-0'], 'attr' => ['placeholder' => 'repeat password']],
             ])
             ->add('firstName', TextType::class, [
                 'attr' => [
@@ -70,12 +63,25 @@ class UserType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Gender'
                 ]
-            ]);
-
-//            ->add('termsAccepted', CheckboxType::class, array(
-//                'mapped' => false,
-//                'constraints' => new IsTrue(),
-//            ));
+            ])
+            ->add('about', TextareaType::class, [
+                'required' => false,
+                'attr' => [
+                    'placeholder' => 'It can be anything about yourself or something you have overcome.',
+                    'style' => 'height: 150px'
+                ]
+            ])
+            ->add('oldPlainPassword', \Symfony\Component\Form\Extension\Core\Type\PasswordType::class, array(
+                'constraints' => array(
+                    new \Symfony\Component\Security\Core\Validator\Constraints\UserPassword(),
+                ),
+                'mapped' => false,
+                'required' => true,
+                'label' => 'Current Password',
+            ));
+//        ->add('avatar', FileType::class, [
+//        'required' => false
+//        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -87,6 +93,6 @@ class UserType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'app_bundle_user_type';
+        return 'app_bundle_profile_form_type';
     }
 }

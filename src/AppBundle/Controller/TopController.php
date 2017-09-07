@@ -15,15 +15,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class TopController extends Controller
 {
     /**
-     * @Route("/top-shouts/{type}")
+     * @Route("/top-shouts/")
      */
-    public function topShoutsAction($type)
+    public function topShoutsAction()
     {
         $em = $this->getDoctrine()->getManager();
         // This service will get all top shouts.
         $topShouts = new TopShouts($em);
         $top10 = $topShouts->getTopShouts($topShouts::$WEEK);
 
-        dump($top10);die;
+        return $this->render('topShouts/list.html.twig', [
+            'topShouts' => $top10
+        ]);
     }
 }

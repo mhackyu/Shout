@@ -3,8 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\ChangePasswordFormType;
+use AppBundle\Form\ProfileFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class ProfileController
@@ -17,8 +20,78 @@ class ProfileController extends Controller
     /**
      * @Route("/user/{username}", name="profile_show")
      */
-    public function indexAction(User $user)
+    public function userAction(User $user)
     {
-        dump($user);die;
+        if ($user->getId() == $this->getUser()->getId()) {
+            return $this->redirectToRoute('my_profile_show');
+        }
+        return $this->render('profile/show.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/profile", name="my_profile_show")
+     * TODO: PLEASE FIX PLAINPASSWORD BUG.
+     */
+    public function profileAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $form = $this->createForm(ProfileFormType::class, $user);
+//        $form->remove('password');
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $encodedPass = $this->get('security.password_encoder')
+                    ->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($encodedPass);
+//            $em->flush();
+                $this->addFlash("success", "Your profile was successfully updated.");
+
+                return $this->redirectToRoute('my_profile_show');
+            }
+            else {
+                $this->addFlash("danger", "Failed to update your profile.");
+            }
+        }
+        dump($form);
+
+        return $this->render('profile/profile_settings.html.twig', [
+            'form' => $form->createView()
+        ]);
+//        dump($this->getUser());die;
+    }
+
+    /**
+     * @Route("/change-password", name="change_password")
+     */
+    public function changePassAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $form = $this->createForm(ChangePasswordFormType::class, $user);
+
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $encodedPass = $this->get('security.password_encoder')
+                    ->encodePassword($user, $user->getPlainPassword());
+                $user->setPassword($encodedPass);
+                $em->flush();
+                $this->addFlash("success", "Password successfully changed.");
+
+                return $this->redirectToRoute('change_password');
+            }
+            else {
+                $this->addFlash("danger", "Failed to update to update password.");
+            }
+        }
+
+        return $this->render('security/change_pass.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

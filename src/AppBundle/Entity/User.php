@@ -65,6 +65,43 @@ class User implements UserInterface, \Serializable
     private $role;
 
     /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=60)
+     */
+    private $firstName;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank()
+     * @Assert\Length(min=3, max=60)
+     */
+    private $lastName;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\Date()
+     */
+    private $dob;
+
+    /**
+     * @ORM\Column(type="string", length=6)
+     * @Assert\Choice(choices={"male", "female"})
+     */
+    private $gender;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Assert\File(mimeTypes={"image/png", "image/jpg", "image/jpeg"})
+     */
+    private $avatar;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $about;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Shout", mappedBy="user")
      */
     private $shout;
@@ -328,5 +365,101 @@ class User implements UserInterface, \Serializable
     public function setFoundHelpful($foundHelpful)
     {
         $this->foundHelpful = $foundHelpful;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param mixed $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param mixed $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
+    /**
+     * @param mixed $dob
+     */
+    public function setDob($dob)
+    {
+        $this->dob = $dob;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param mixed $gender
+     */
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvatar()
+    {
+        return $this->avatar;
+    }
+
+    /**
+     * @param mixed $avatar
+     */
+    public function setAvatar($avatar)
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAbout()
+    {
+        return $this->about;
+    }
+
+    /**
+     * @param mixed $about
+     */
+    public function setAbout($about)
+    {
+        $this->about = $about;
     }
 }

@@ -23,6 +23,7 @@
     {#<link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">#}
     <link href="{{ asset('assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ asset('assets/app/css/style.css') }}" rel="stylesheet" />
 
 </head>
 <body>
@@ -31,7 +32,10 @@
     {% include 'layouts/navbar.html.twig' %}
     <div class="wrapper">
         {# CONTENT #}
-        <div class="container-fluid" style="margin-top: 60px">
+        <div style="margin-top: 71px; margin-bottom: -12px">
+            {% include 'layouts/flash_message.html.twig' %}
+        </div>
+        <div class="container-fluid">
             {% block content %}{% endblock %}
         </div>
     </div>

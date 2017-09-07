@@ -2,61 +2,24 @@
 
 {% block content %}
     <div class="row">
-
         {#<div class="col-md-3">#}
 
         {#</div>#}
-
         <div class="col-md-9 bg-faded">
-            <div class="mb-3"></div>
+            {#<div class="mb-3"></div>#}
             {# NEW SHOUT #}
             {% include 'shout/new_shout_content.html.twig' %}
 
             {# SHOUTS FEED #}
-            {% include 'shout/shout_feed_content.html.twig' %}
+            <h4 class="mt-5"><strong>Shouts Feed</strong></h4><hr>
+            <div class="row">
+                {% include 'shout/shout_feed_content.html.twig' %}
+            </div>
         </div>
 
         <div class="col-md-3">
-            <div class="mt-5"></div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h5 class="panel-title"><strong>Loudest Shouts of the week</strong></h5>
-                </div>
-                <div class="panel-content">
-                    <div class="list-group">
-                        <a href="#" class="list-unstyled">1. Bakit kasi ganun?
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">2. Ang kwento ng lobo
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"><i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">3. San ba ako nagkulang?
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 1234215|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">4. WALANG FOREVER. Hindi ka
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">5. #FafaMhack <br>
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">6. Bakit kasi ganun?
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">7. Ang kwento ng lobo
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"><i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">8. San ba ako nagkulang?
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12312345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">9. WALANG FOREVER. Hindi ka
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                        <a href="#" class="list-unstyled">10. #FafaMhack <br>
-                            {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ 12345|number_format }}</span></div>#}
-                        </a>
-                    </div>
-                </div>
-            </div>
+            {# GET TOP SHOUTS OF THE WEEK #}
+            {{ render(controller('AppBundle:Top:topShouts')) }}
 
             <div class="panel panel-default mt-3">
                 <div class="panel-heading">

@@ -47,9 +47,10 @@ class ShoutRepository extends \Doctrine\ORM\EntityRepository
      * Get top shouts within specific range of date
      * @param $start - start date
      * @param $end - end date
+     * @param $max - max result
      * @return array
      */
-    public function topShoutsWithin($start, $end)
+    public function topShoutsWithin($start, $end, $max = 10)
     {
         return $this->getEntityManager()
             ->createQuery('
@@ -60,7 +61,7 @@ class ShoutRepository extends \Doctrine\ORM\EntityRepository
                 GROUP BY l.shout 
                 ORDER BY cnt DESC
             ')
-            ->setMaxResults(10)
+            ->setMaxResults($max)
             ->setParameter('start', $start)
             ->setParameter('end', $end)
             ->getResult();
