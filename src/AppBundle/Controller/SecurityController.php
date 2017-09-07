@@ -7,6 +7,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
+/**
+ * Class SecurityController
+ * Controller used to handle the security of the site.
+ * @author Mark Christian Paderes <markpaderes0932@yahoo.com>
+ * @package AppBundle\Controller
+ */
 class SecurityController extends Controller
 {
     /**

@@ -23,12 +23,17 @@
                     <hr>
                     <div class="panel-footer">
                         <div class="text-center">
+
+                            {% if app.user|isLoud(shout) %}
+                                <span class="btn btn-primary btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Loud</span>
+                            {% else %}
+                                <span class="btn btn-outline-primary btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Loud</span>
+                            {% endif %}
+
                             {% if app.user|isLove(shout) %}
-                                <span class="btn btn-primary"><i class="fa fa-bullhorn"></i>Loud</span>
                                 <span class="btn btn-danger btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>
                             {% else %}
-                                <span class="btn btn-outline-primary "><i class="fa fa-bullhorn"></i>Loud</span>
-                                <span class="btn btn-outline-danger btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart" title="love this"></i> Love</span>
+                                <span class="btn btn-outline-danger btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart-o" title="love this"></i> Love</span>
                             {% endif %}
                         </div>
                         <hr>
@@ -37,66 +42,54 @@
                                 <img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-2.jpg') }}" style="width: 64px; height: 64px;">
                             </a>
                             <div class="media-body">
-                                <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>
-                                <div class="mt-2">
-                                    <textarea type="text" class="form-control" id="" placeholder="Please be nice with your advice :)" style="height: 80px"></textarea>
-                                </div>
-                                <div class="pull-right mt-2">
+                                {#<h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>#}
+                                {#<div class="">#}
+                                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                                {{ form_start(form) }}
+                                {{ form_widget(form) }}
+                                <div class="pull-right">
                                     <button type="submit" class="btn btn-default">post</button>
                                 </div>
+                                {{ form_end(form) }}
 
                             </div>
                         </div>
                     </div>
                     <hr>
-                    <h5><b>Advices(283)</b></h5>
-                    <div class="media">
-                        <a class="media-left mr-2" href="#">
-                            <img class="img-rounded" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 64px; height: 64px;">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a class="" href="">Jen</a></h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                            Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-                            faucibus.
-                            <div>
-                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
-                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="media">
-                        <a class="media-left mr-2" href="#">
-                            <img class="img-rounded" src="{{ asset('assets/img/faces/ayo-ogunseinde-2.jpg') }}" style="width: 64px; height: 64px;">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a class="" href="">Ogunseunde</a></h4>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi explicabo facilis in maxime, mollitia obcaecati reiciendis sequi velit? A aliquid aperiam architecto aut consequuntur deserunt ipsam officia placeat sunt voluptatum?
-                            <div>
-                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
-                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
-                            </div>
-                        </div>
-                    </div>
+                    {# ADVICE #}
+                    {% include 'shout/_advice.html.twig' %}
 
-                    <div class="media">
-                        <a class="media-left mr-2" href="#">
-                            <img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-3.jpg') }}" style="width: 64px; height: 64px;">
-                        </a>
-                        <div class="media-body">
-                            <h4 class="media-heading"><a class="" href="">clem</a></h4>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                            sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-                            Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in
-                            faucibus.
-                            <div>
-                                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
-                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
-                            </div>
-                        </div>
-                    </div>
+                    {#<div class="media">#}
+                        {#<a class="media-left mr-2" href="#">#}
+                            {#<img class="img-rounded" src="{{ asset('assets/img/faces/ayo-ogunseinde-2.jpg') }}" style="width: 64px; height: 64px;">#}
+                        {#</a>#}
+                        {#<div class="media-body">#}
+                            {#<h4 class="media-heading"><a class="" href="">Ogunseunde</a></h4>#}
+                            {#Lorem ipsum dolor sit amet, consectetur adipisicing elit. Excepturi explicabo facilis in maxime, mollitia obcaecati reiciendis sequi velit? A aliquid aperiam architecto aut consequuntur deserunt ipsam officia placeat sunt voluptatum?#}
+                            {#<div>#}
+                                {#<span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>#}
+                                {#<span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+
+                    {#<div class="media">#}
+                        {#<a class="media-left mr-2" href="#">#}
+                            {#<img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-3.jpg') }}" style="width: 64px; height: 64px;">#}
+                        {#</a>#}
+                        {#<div class="media-body">#}
+                            {#<h4 class="media-heading"><a class="" href="">clem</a></h4>#}
+                            {#Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante#}
+                            {#sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.#}
+                            {#Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in#}
+                            {#faucibus.#}
+                            {#<div>#}
+                                {#<span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>#}
+                                {#<span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
 
                     <div class="text-center mt-3"><a href="">View more advice</a></div>
 

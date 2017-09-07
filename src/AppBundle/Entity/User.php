@@ -74,10 +74,28 @@ class User implements UserInterface, \Serializable
      */
     private $love;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Loud", mappedBy="user")
+     */
+    private $loud;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Advice", mappedBy="user")
+     */
+    private $advice;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\FoundHelpful", mappedBy="user")
+     */
+    private $foundHelpful;
+
     public function __construct()
     {
         $this->isActive = true;
         $this->shout = new ArrayCollection();
+        $this->love = new ArrayCollection();
+        $this->loud = new ArrayCollection();
+        $this->foundHelpful = new ArrayCollection();
 // may not be needed, see section on salt below
 // $this->salt = md5(uniqid(null, true));
     }
@@ -262,5 +280,53 @@ class User implements UserInterface, \Serializable
     public function setLove($love)
     {
         $this->love = $love;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdvice()
+    {
+        return $this->advice;
+    }
+
+    /**
+     * @param mixed $advice
+     */
+    public function setAdvice($advice)
+    {
+        $this->advice = $advice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLoud()
+    {
+        return $this->loud;
+    }
+
+    /**
+     * @param mixed $loud
+     */
+    public function setLoud($loud)
+    {
+        $this->loud = $loud;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getFoundHelpful()
+    {
+        return $this->foundHelpful;
+    }
+
+    /**
+     * @param mixed $foundHelpful
+     */
+    public function setFoundHelpful($foundHelpful)
+    {
+        $this->foundHelpful = $foundHelpful;
     }
 }

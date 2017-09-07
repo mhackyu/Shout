@@ -2,16 +2,21 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Love;
+use AppBundle\Entity\Advice;
 use AppBundle\Entity\Shout;
+use AppBundle\Form\AdviceFormType;
 use AppBundle\Form\ShoutType;
 use AppBundle\Utils\Slugger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class ShoutController
+ * Controller used to manage shout contents in the public part of the site
+ * @author Mark Christian E. Paderes <markpaderes0932@yahoo.com>
  * @package AppBundle\Controller
  * @Route("/shout")
  */
@@ -71,11 +76,42 @@ class ShoutController extends Controller
 
     /**
      * @Route("/{slug}", name="shout_show")
+     * @Method({"POST", "GET"})
      */
-    public function showAction(Shout $shout)
+    public function showAction(Request $request, Shout $shout)
     {
+        $em = $this->getDoctrine()->getManager();
+        $advice = new Advice();
+        $form = $this->createForm(AdviceFormType::class, $advice);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $advice->setShout($shout);
+            $advice->setUser($this->getUser());
+            $em->persist($advice);
+            $em->flush();
+
+            return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
+        }
+
         return $this->render('shout/show.html.twig', [
-            'shout' => $shout
+            'shout' => $shout,
+            'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/{slug}/delete", name="shout_delete")
+     */
+    public function deleteAction(Shout $shout)
+    {
+        // add token validation here
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($shout);
+        $em->flush();
+
+        return new Response("deleted");
     }
 }

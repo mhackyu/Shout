@@ -28,6 +28,7 @@ class Shout
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotBlank()
+     * @Assert\Length(min="3", max="250")
      */
     private $title;
 
@@ -36,6 +37,7 @@ class Shout
      *
      * @ORM\Column(name="body", type="text")
      * @Assert\NotBlank()
+     * @Assert\Length(min="10")
      */
     private $body;
 
@@ -60,14 +62,27 @@ class Shout
     private $user;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Advice", mappedBy="shout")
+     * @ORM\OrderBy(value={"createdAt" = "DESC"})
+     */
+    private $advice;
+
+    /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Love", mappedBy="shout")
      */
     private $love;
+
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Loud", mappedBy="shout")
+     */
+    private $loud;
 
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->love = new ArrayCollection();
+        $this->loud = new ArrayCollection();
+        $this->advice = new ArrayCollection();
     }
 
     /**
@@ -206,6 +221,38 @@ class Shout
     public function setLove($love)
     {
         $this->love = $love;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLoud()
+    {
+        return $this->loud;
+    }
+
+    /**
+     * @param mixed $loud
+     */
+    public function setLoud($loud)
+    {
+        $this->loud = $loud;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdvice()
+    {
+        return $this->advice;
+    }
+
+    /**
+     * @param mixed $advice
+     */
+    public function setAdvice($advice)
+    {
+        $this->advice = $advice;
     }
 
 }

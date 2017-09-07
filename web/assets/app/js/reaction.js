@@ -51,4 +51,55 @@ $(document).ready( function () {
         $(this).data('is-love',!isLove);
         // $(this).attr('data-is-love', !isLove);
     });
+
+    $('.btn-loud').on('click', function (e) {
+        var id = $(this).data('id');
+        var isLoud = $(this).data('is-loud');
+        // var isLoud = $(this).attr('data-is-loud');
+        var loudCount = parseInt($('#loud-count-' + id).text());
+        var addLoveUrl = "/loud/" + id + '/add';
+        var removeLoveUrl = "/loud/" + id + '/remove';
+
+        // alert(loudCount+1);
+
+        if (isLoud) {
+            // remove loud from shout.
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-outline-primary');
+            $('.loud-caption').text("You loud this");
+            $.ajax({
+                url: removeLoveUrl,
+                method: "GET",
+                success: function (data) {
+                    // alert(data);
+                    $('#loud-count-' + id).text(loudCount-1);
+                },
+                error: function () {
+                    alert("failed request");
+                }
+            });
+        }
+        else {
+            // if the user press the loud reaction..
+            $(this).removeClass('btn-outline-primary');
+            $(this).addClass('btn-primary');
+            $('.loud-caption').text("Love");
+            $.ajax({
+                url: addLoveUrl,
+                method: "GET",
+                success: function (data) {
+                    // alert(data);
+                    $('#loud-count-' + id).text(loudCount+1);
+                },
+                error: function () {
+                    alert("failed request");
+                }
+            });
+        }
+        $(this).removeClass('animated bounceIn');
+        $(this).addClass('animated bounceIn');
+        // update data-is-loud value.
+        $(this).data('is-loud',!isLoud);
+        // $(this).attr('data-is-loud', !isLoud);
+    });
 });

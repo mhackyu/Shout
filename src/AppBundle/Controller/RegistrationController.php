@@ -8,6 +8,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * Class RegistrationController
+ * Controller used to manage the registration of the user
+ * @author Mark Christian Paderes <markpaderes0932@yahoo.com>
+ * @package AppBundle\Controller
+ */
 class RegistrationController extends Controller
 {
     /**

@@ -24,4 +24,45 @@ class ShoutRepository extends \Doctrine\ORM\EntityRepository
             ')
             ->getResult();
     }
+
+    /**
+     * Get shouts within specific range of date
+     * @param $start - start date
+     * @param $end - end date
+     * @return array
+     */
+    public function shoutsWithin($start, $end)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT s FROM AppBundle:Shout s 
+                WHERE s.createdAt < :end AND s.createdAt > :start 
+            ')
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getResult();
+    }
+
+    /**
+     * Get top shouts within specific range of date
+     * @param $start - start date
+     * @param $end - end date
+     * @return array
+     */
+    public function topShoutsWithin($start, $end)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT s.title, s.slug, COUNT(l.id) as cnt
+                FROM AppBundle:Loud l
+                INNER JOIN AppBundle:Shout s
+                WHERE s.id = l.shout AND s.createdAt < :end AND s.createdAt > :start
+                GROUP BY l.shout 
+                ORDER BY cnt DESC
+            ')
+            ->setMaxResults(10)
+            ->setParameter('start', $start)
+            ->setParameter('end', $end)
+            ->getResult();
+    }
 }

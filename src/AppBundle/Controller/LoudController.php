@@ -2,7 +2,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Love;
+use AppBundle\Entity\Loud;
 use AppBundle\Entity\Shout;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,26 +11,26 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class LoveController
- * Controller used to manage love reaction of users.
+ * Class LoudController
+ * Controller used to managed loud reaction of users.
  * @author Mark Christian Paderes <markpaderes0932@yahoo.com>
  * @package AppBundle\Controller
  */
-class LoveController extends Controller
+class LoudController extends Controller
 {
     /**
-     * @Route("/love/{slug}/add")
+     * @Route("/loud/{slug}/add")
      * @Method("GET")
      */
     public function newAction(Request $request, Shout $shout)
     {
         if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
-            $love = new Love();
-            $love->setShout($shout);
-            $love->setUser($this->getUser());
+            $loud = new Loud();
+            $loud->setShout($shout);
+            $loud->setUser($this->getUser());
 
-            $em->persist($love);
+            $em->persist($loud);
             $em->flush();
 
             return new Response("success");
@@ -40,20 +40,20 @@ class LoveController extends Controller
     }
 
     /**
-     * @Route("/love/{slug}/remove")
+     * @Route("/loud/{slug}/remove")
      * @Method("GET")
      */
     public function removeAction(Request $request, Shout $shout)
     {
         if ($request->isXmlHttpRequest()) {
             $em = $this->getDoctrine()->getManager();
-            $love = $em->getRepository('AppBundle:Love')
+            $loud = $em->getRepository('AppBundle:Loud')
                 ->findOneBy([
                     'shout' => $shout,
                     'user' => $this->getUser()
                 ]);
-            if ($love) {
-                $em->remove($love);
+            if ($loud) {
+                $em->remove($loud);
                 $em->flush();
                 return new Response("success");
             }

@@ -7,12 +7,12 @@ use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * Class LoveExtension
- * This Twig extension handles love reactions inside Twig template.
+ * Class LoudExtension
+ * This Twig extension handles loud reactions inside Twig template.
  * @author Mark Christian Paderes <markpaderes0932@yahoo.com>
  * @package AppBundle\Twig\Extension
  */
-class LoveExtension extends \Twig_Extension
+class LoudExtension extends \Twig_Extension
 {
     private $doctrine;
 
@@ -26,39 +26,39 @@ class LoveExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'love_extension';
+        return 'loud_extension';
     }
 
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('isLove', [$this, 'isLoveFilter']),
-            new \Twig_SimpleFilter('numOfLove', [$this, 'numOfLoveFilter'])
+            new \Twig_SimpleFilter('isLoud', [$this, 'isLoudFilter']),
+            new \Twig_SimpleFilter('numOfLoud', [$this, 'numOfLoudFilter'])
         ];
     }
 
-    public function isLoveFilter(User $user, Shout $shout)
+    public function isLoudFilter(User $user, Shout $shout)
     {
-        $heart = $this->doctrine->getRepository('AppBundle:Love')
+        $loud = $this->doctrine->getRepository('AppBundle:Loud')
             ->findOneBy([
                 'user' => $user,
                 'shout' => $shout
             ]);
 
-        if ($heart) {
+        if ($loud) {
             return true;
         }
 
         return false;
     }
 
-    public function numOfLoveFilter(Shout $shout)
+    public function numOfLoudFilter(Shout $shout)
     {
-        $love = $this->doctrine->getRepository('AppBundle:Love')
+        $loud = $this->doctrine->getRepository('AppBundle:Loud')
             ->findBy([
                 'shout' => $shout
             ]);
 
-        return count($love);
+        return count($loud);
     }
 }

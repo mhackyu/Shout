@@ -1,12 +1,9 @@
 <?php
 /**
- * shout - Love.php
- * Author: Mark Christian Paderes
- * Email: markpaderes0932@yahoo.com
- *
- * User: Paderes
- * Date: 8/21/2017
- * Time: 5:04 PM
+ * Created by PhpStorm.
+ * User: mhackyu
+ * Date: 9/6/17
+ * Time: 3:12 PM
  */
 
 namespace AppBundle\Entity;
@@ -16,9 +13,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="love")
+ * @ORM\Table(name="found_helpful")
  */
-class Love
+class FoundHelpful
 {
     /**
      * @ORM\Id
@@ -28,13 +25,13 @@ class Love
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shout", inversedBy="love")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Advice", inversedBy="foundHelpful")
      * @ORM\JoinColumn(onDelete="cascade")
      */
-    private $shout;
+    private $advice;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="love")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="foundHelpful")
      */
     private $user;
 
@@ -57,17 +54,17 @@ class Love
     /**
      * @return mixed
      */
-    public function getShout()
+    public function getAdvice()
     {
-        return $this->shout;
+        return $this->advice;
     }
 
     /**
-     * @param mixed $shout
+     * @param mixed $advice
      */
-    public function setShout($shout)
+    public function setAdvice($advice)
     {
-        $this->shout = $shout;
+        $this->advice = $advice;
     }
 
     /**
@@ -85,5 +82,4 @@ class Love
     {
         $this->user = $user;
     }
-
 }

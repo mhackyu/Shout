@@ -1,0 +1,16 @@
+<h5><b>Advices ({{ shout|numOfAdvice }})</b></h5>
+{% for advice in shout.advice %}
+    <div class="media mt-3">
+        <a class="media-left mr-2" href="#">
+            <img class="img-rounded" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 64px; height: 64px;">
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a></h4>
+            {{ advice.content }}
+            <div>
+                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
+            </div>
+        </div>
+    </div>
+{% endfor %}

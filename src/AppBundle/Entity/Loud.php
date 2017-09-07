@@ -1,12 +1,9 @@
 <?php
 /**
- * shout - Love.php
- * Author: Mark Christian Paderes
- * Email: markpaderes0932@yahoo.com
- *
- * User: Paderes
- * Date: 8/21/2017
- * Time: 5:04 PM
+ * Created by PhpStorm.
+ * User: mhackyu
+ * Date: 9/6/17
+ * Time: 1:39 PM
  */
 
 namespace AppBundle\Entity;
@@ -15,10 +12,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
- * @ORM\Table(name="love")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\LoudRepository")
+ * @ORM\Table(name="loud")
  */
-class Love
+class Loud
 {
     /**
      * @ORM\Id
@@ -28,13 +25,13 @@ class Love
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shout", inversedBy="love")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shout", inversedBy="loud")
      * @ORM\JoinColumn(onDelete="cascade")
      */
     private $shout;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="love")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="loud")
      */
     private $user;
 
@@ -85,5 +82,4 @@ class Love
     {
         $this->user = $user;
     }
-
 }
