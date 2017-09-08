@@ -49,7 +49,10 @@ class AdviceController extends Controller
      */
     public function showAction(Advice $advice)
     {
-        dump($advice);die;
+        return $this->render("advice/show.html.twig", [
+            'shout' => $advice->getShout(),
+            'advice' => $advice
+        ]);
     }
 
     /**
