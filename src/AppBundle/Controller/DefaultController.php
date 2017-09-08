@@ -14,6 +14,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->redirectToRoute('login');
+        return $this->render("default/landing.html.twig");
+//        return $this->redirectToRoute('login');
     }
 }
