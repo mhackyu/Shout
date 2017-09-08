@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class AdviceController
@@ -44,22 +45,59 @@ class AdviceController extends Controller
     }
 
     /**
-     * @Route("/advice/{id}/helpful", name="advice_helpful")
+     * @Route("/advice/{id}/show", name="advice_show")
      */
-    public function foundHelpfulAction(Advice $advice)
+    public function showAction(Advice $advice)
     {
-        $helpful = new FoundHelpful();
-        $helpful->setAdvice($advice);
-        $helpful->setUser($this->getUser());
-
-//        $advice->setFoundHelpful($helpful);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($helpful);
-        $em->flush();
-
         dump($advice);die;
+    }
 
+    /**
+     * @Route("/advice/{id}/helpful", name="advice_add_helpful")
+     * @Method("POST")
+     */
+    public function foundHelpfulAddAction(Request $request, Advice $advice)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $helpful = new FoundHelpful();
+            $helpful->setAdvice($advice);
+            $helpful->setUser($this->getUser());
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($helpful);
+            $em->flush();
+
+            return new Response("success");
+        }
+
+        return new Response("failed");
+
+    }
+
+    /**
+     * @Route("/advice/{id}/remove-helpful", name="advice_remove_helpful")
+     * @Method("POST")
+     */
+    public function foundHelpfulRemoveAction(Request $request, Advice $advice)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $em = $this->getDoctrine()->getManager();
+            $foundHelpful = $em->getRepository('AppBundle:FoundHelpful')
+                ->findOneBy([
+                    'advice' => $advice,
+                    'user' => $this->getUser()
+                ]);
+            if ($foundHelpful) {
+                $em->remove($foundHelpful);
+                $em->flush();
+                return new Response("success");
+            }
+            else {
+                return new Response("failed");
+            }
+        }
+
+        return new Response("failed");
     }
 
 }

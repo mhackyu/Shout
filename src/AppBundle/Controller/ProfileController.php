@@ -39,14 +39,14 @@ class ProfileController extends Controller
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $form = $this->createForm(ProfileFormType::class, $user);
-//        $form->remove('password');
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
-
+            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
+            dump($user);
             if ($form->isSubmitted() && $form->isValid()) {
-                $encodedPass = $this->get('security.password_encoder')
-                    ->encodePassword($user, $user->getPlainPassword());
-                $user->setPassword($encodedPass);
+//                $encodedPass = $this->get('security.password_encoder')
+//                    ->encodePassword($user, $user->getPlainPassword());
+//                $user->setPassword($encodedPass);
 //            $em->flush();
                 $this->addFlash("success", "Your profile was successfully updated.");
 
@@ -56,12 +56,10 @@ class ProfileController extends Controller
                 $this->addFlash("danger", "Failed to update your profile.");
             }
         }
-        dump($form);
 
         return $this->render('profile/profile_settings.html.twig', [
             'form' => $form->createView()
         ]);
-//        dump($this->getUser());die;
     }
 
     /**

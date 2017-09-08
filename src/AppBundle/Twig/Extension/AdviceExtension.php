@@ -2,7 +2,9 @@
 
 namespace AppBundle\Twig\Extension;
 
+use AppBundle\Entity\Advice;
 use AppBundle\Entity\Shout;
+use AppBundle\Entity\User;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
@@ -31,7 +33,8 @@ class AdviceExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('numOfAdvice', [$this, 'numOfAdviceFilter'])
+            new \Twig_SimpleFilter('numOfAdvice', [$this, 'numOfAdviceFilter']),
+            new \Twig_SimpleFilter('is_helpful', [$this, 'isHelpfulFilter'])
         ];
     }
 
@@ -43,5 +46,20 @@ class AdviceExtension extends \Twig_Extension
             ]);
 
         return count($advice);
+    }
+
+    public function isHelpfulFilter(User $user, Advice $advice)
+    {
+        $helpful = $this->doctrine->getRepository('AppBundle:FoundHelpful')
+            ->findOneBy([
+                'user' => $user,
+                'advice' => $advice
+            ]);
+
+        if ($helpful) {
+            return true;
+        }
+
+        return false;
     }
 }

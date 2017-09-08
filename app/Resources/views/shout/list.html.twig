@@ -3,7 +3,6 @@
 {% block content %}
     <div class="row">
         {#<div class="col-md-3">#}
-
         {#</div>#}
         <div class="col-md-9 bg-faded">
             {#<div class="mb-3"></div>#}
@@ -20,26 +19,8 @@
         <div class="col-md-3">
             {# GET TOP SHOUTS OF THE WEEK #}
             {{ render(controller('AppBundle:Top:topShouts')) }}
-
-            <div class="panel panel-default mt-3">
-                <div class="panel-heading">
-                    <h5 class="panel-title"><strong>Top advices of the week</strong></h5>
-                </div>
-                <div class="panel-content">
-                    <div class="list-group">
-                        <a href="#" class="list-unstyled">1. "Ganto kasi yan kapag nagmh.."</a>
-                        <a href="#" class="list-unstyled">2. "Minsan may mga bagay talag.."</a>
-                        <a href="#" class="list-unstyled">3. "Bakit pa kasi natin kailan.."</a>
-                        <a href="#" class="list-unstyled">4. "Wag mo dapat gawin yun kas.."</a>
-                        <a href="#" class="list-unstyled">5. "Ndi dapat natin nilalagay .."</a>
-                        <a href="#" class="list-unstyled">6. "Ganto kasi yan kapag nagma.."</a>
-                        <a href="#" class="list-unstyled">7. "Minsan may mga bagay talag.."</a>
-                        <a href="#" class="list-unstyled">8. "Bakit pa kasi natin kailan.."</a>
-                        <a href="#" class="list-unstyled">9. "Wag mo dapat gawin yun kas.."</a>
-                        <a href="#" class="list-unstyled">10. "Ndi dapat natin nilalagay .."</a>
-                    </div>
-                </div>
-            </div>
+            {# GET TOP ADVICES OF THE WEEK #}
+            {{ render(controller('AppBundle:Top:topAdvices')) }}
         </div>
     </div>
 {% endblock %}

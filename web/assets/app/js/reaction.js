@@ -52,6 +52,7 @@ $(document).ready( function () {
         // $(this).attr('data-is-love', !isLove);
     });
 
+    // loud reaction
     $('.btn-loud').on('click', function (e) {
         var id = $(this).data('id');
         var isLoud = $(this).data('is-loud');
@@ -101,5 +102,54 @@ $(document).ready( function () {
         // update data-is-loud value.
         $(this).data('is-loud',!isLoud);
         // $(this).attr('data-is-loud', !isLoud);
+    });
+
+    // found helpful.
+    $('.btn-helpful').on('click', function (e) {
+        var id = $(this).data('id');
+        var isHelpful = $(this).data('is-helpful');
+        var helpfulCount = parseInt($('#helpful-count-' + id).text());
+        var addHelpfulUrl = "/advice/" + id + '/helpful';
+        var removeHelpfulUrl = "/advice/" + id + '/remove-helpful';
+
+        if (isHelpful) {
+            // remove helpful from shout.
+            $(this).removeClass('btn-primary');
+            $(this).addClass('btn-outline-primary');
+            // $('.helpful-caption').text("You found this helpful");
+            // $(this).text("Helpful");
+            $.ajax({
+                url: removeHelpfulUrl,
+                method: "POST",
+                success: function (data) {
+                    // $('#helpful-count-' + id).text(helpfulCount-1);
+                },
+                error: function () {
+                    alert("failed request");
+                }
+            });
+        }
+        else {
+            // if the user press the helpful reaction..
+            $(this).removeClass('btn-outline-primary');
+            $(this).addClass('btn-primary');
+            // $('.helpful-caption').text("Helpful");
+            // $(this).text("You found this helpful");
+            $.ajax({
+                url: addHelpfulUrl,
+                method: "POST",
+                success: function (data) {
+                    // alert(data);
+                    // $('#helpful-count-' + id).text(helpfulCount+1);
+                },
+                error: function () {
+                    alert("failed request");
+                }
+            });
+        }
+        $(this).removeClass('animated bounceIn');
+        $(this).addClass('animated bounceIn');
+        // update data-is-helpful value.
+        $(this).data('is-helpful',!isHelpful);
     });
 });

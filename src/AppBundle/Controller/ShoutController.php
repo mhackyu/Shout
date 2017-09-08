@@ -95,8 +95,18 @@ class ShoutController extends Controller
             return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
         }
 
+        $advices = $em->getRepository('AppBundle:Advice')
+            ->findBy(
+                ['shout' => $shout],
+                ['createdAt' => "DESC"],
+                5
+            );
+
+        dump($advices);
+
         return $this->render('shout/show.html.twig', [
             'shout' => $shout,
+            'advices' => $advices,
             'form' => $form->createView()
         ]);
     }

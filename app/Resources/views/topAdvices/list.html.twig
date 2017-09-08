@@ -1,0 +1,22 @@
+{#<div class="mt-5"></div>#}
+<div class="panel panel-default mt-5">
+    <div class="panel-heading">
+        <h5 class="panel-title"><strong>Top advices of the week</strong></h5>
+    </div>
+    <div class="panel-content">
+        <div class="list-group">
+            {% for key, advice in topAdvices %}
+                <a href="{{ path('advice_show', {id: advice['id']}) }}" class="list-unstyled">
+                    {{ key+1 }}.
+                    {% if advice['content']|length > 16 %}
+                        {{ advice['content']|slice(0, 16) }}...
+                    {% else %}
+                        {{ advice['content'] }}
+                    {% endif %}
+                    <span class="badge badge-default mb-1"> <i class="fa fa-thumbs-o-up"></i>{{ advice['cnt']|number_format }}</span>
+                    {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ advice['cnt']|number_format }}</span></div>#}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>

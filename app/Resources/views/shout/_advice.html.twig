@@ -1,6 +1,6 @@
 <h5><b>Advices ({{ shout|numOfAdvice }})</b></h5>
-{% for advice in shout.advice %}
-    <div class="media mt-3">
+{% for advice in advices %}
+    <div class="media mt-3 mb-3">
         <a class="media-left mr-2" href="#">
             <img class="img-rounded" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 64px; height: 64px;">
         </a>
@@ -8,9 +8,18 @@
             <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a></h4>
             {{ advice.content }}
             <div>
-                <span class="btn btn-outline-primary btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                {% if app.user|is_helpful(advice) %}
+                    <span class="btn btn-primary btn-round btn-sm mt-2 btn-helpful" data-id="{{ advice.id }}" data-is-helpful="true"><i class="fa fa-thumbs-up"></i>Helpful</span>
+                {% else %}
+                    <span class="btn btn-outline-primary btn-round btn-sm mt-2 btn-helpful" data-id="{{ advice.id }}" data-is-helpful="false"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
+                {% endif %}
+
                 <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
             </div>
         </div>
     </div>
 {% endfor %}
+
+{% if shout.advice|length > 5 %}
+    <div class="text-center mt-3 mb-3"><a href="">View more advice</a></div>
+{% endif %}

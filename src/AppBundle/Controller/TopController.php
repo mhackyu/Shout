@@ -28,4 +28,19 @@ class TopController extends Controller
             'topShouts' => $top10
         ]);
     }
+
+    /**
+     * @Route("/top-advices/")
+     */
+    public function topAdvicesAction()
+    {
+        $em = $this->getDoctrine()->getManager();
+        //TODO: Create a service that will handle all top advices
+        $topAdvices = $em->getRepository('AppBundle:Advice')
+            ->topAdvicesWithin(new \DateTime("now-1week"), new \DateTime("now"));
+
+        return $this->render('topAdvices/list.html.twig', [
+            'topAdvices' => $topAdvices
+        ]);
+    }
 }
