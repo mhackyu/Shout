@@ -27,7 +27,7 @@ class Advice
     private $id;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      * @Assert\Length(min="1")
      */
     private $content;
