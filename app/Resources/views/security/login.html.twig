@@ -46,9 +46,9 @@
 
                             <form action="{{ path('login') }}" class="register-form" method="post">
                                 <label for="username">Username or Email</label>
-                                <input type="text" class="form-control" id="username" name="_username" placeholder="Username or Email" value="{{ last_username }}">
+                                <input type="text" class="form-control" id="username" name="_username" placeholder="Username or Email" value="{{ last_username }}" required>
                                 <label for="password">Password</label>
-                                <input type="password" class="form-control" id="password" name="_password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="_password" placeholder="Password" required>
                                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                                 <button type="submit" class="btn btn-danger btn-block btn-round">Login</button>
                                 <a href="{{ path('registration') }}" class="btn btn-default btn-block btn-round mt-2">Sign up</a>

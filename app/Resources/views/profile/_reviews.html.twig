@@ -1,0 +1,32 @@
+<div class="text-center"><button class="btn btn-warning btn-round"><i class="fa fa-plus"></i> Review</button></div>
+<ul class="list-unstyled follows">
+    {% for review in reviews %}
+        <li>
+            <div class="row">
+                <div class="col-md-2 offset-md-0">
+                    <img src="../assets/img/faces/clem-onojeghuo-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div>
+                <div class="col-md-7 col-xs-4">
+                    <h6>{{ review.reviewedBy.username }}<br/><small>{{ review.review }}</small></h6>
+                </div>
+                {#<div class="col-md-3 col-xs-2">#}
+                {#<div class="unfollow" >#}
+                {#<div class="checkbox">#}
+                {#<input id="checkbox1" type="checkbox" checked="">#}
+                {#<label for="checkbox1"></label>#}
+                {#</div>#}
+                {#</div>#}
+                {#</div>#}
+            </div>
+        </li>
+        <hr />
+    {% else %}
+        <li class="row">
+            <p>No Reviews</p>
+            {#<div class="tab-pane text-center" id="following" role="tabpanel">#}
+                {#<h3 class="text-muted">No Reviews</h3>#}
+                {#<button class="btn btn-warning btn-round">Find artists</button>#}
+            {#</div>#}
+        </li>
+    {% endfor %}
+</ul>

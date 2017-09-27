@@ -25,8 +25,14 @@ class ProfileController extends Controller
         if ($user->getId() == $this->getUser()->getId()) {
             return $this->redirectToRoute('my_profile_show');
         }
+
+        $em = $this->getDoctrine()->getManager();
+        $reviews = $em->getRepository('AppBundle:User')
+            ->find($user->getId())->getUserReview();
+
         return $this->render('profile/show.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'reviews' => $reviews
         ]);
     }
 

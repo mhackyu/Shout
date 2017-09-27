@@ -31,7 +31,7 @@
                 <span class="navbar-toggler-bar"></span>
                 <span class="navbar-toggler-bar"></span>
             </button>
-            <a class="navbar-brand" href="https://www.creative-tim.com">Shout!</a>
+            <a class="navbar-brand" href="{{ path('homepage') }}">Shout!</a>
         </div>
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto">
@@ -68,10 +68,17 @@
     <div class="filter"></div>
     <div class="container">
         <div class="motto text-center">
-            <h1>What is Shout?</h1>
-            <h3>Shout is a problem sharing site which allows the “shoutee” to express his life story, to lessen the emotion and receive advices from other user.</h3>
+            {% if quote is not empty %}
+                <h1>Quote of the day</h1>
+                <h3>"{{ quote.content }}"</h3>
+                <h6>{{ quote.quoteBy }}</h6>
+            {% else %}
+                <h2 class="title">What is Shout?</h2>
+                <h5 class="description">Shout is a problem sharing site which allows the “shoutee” to express his life story, to lessen the emotion and receive advices from other user.</h5>
+            {% endif %}
+            
             <br />
-            <a href="https://www.youtube.com/" target="_blank" class="btn btn-outline-neutral btn-round"><i class="fa fa-play"></i>Watch video</a>
+            <a href="https://www.youtube.com/" target="_blank" class="btn btn-outline-neutral btn-round"><i class="fa fa-play"></i>Browse More</a>
             {#<button type="button" class="btn btn-outline-neutral btn-round">Download</button>#}
         </div>
     </div>
@@ -81,8 +88,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-8 offset-md-2">
-                    <h2 class="title">You're not alone</h2>
-                    <h5 class="description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad asperiores enim ex facere harum laboriosam quam tenetur. Aspernatur consequatur, excepturi ipsa nam necessitatibus quia quos. Architecto obcaecati repudiandae saepe sit.</h5>
+                    <h2 class="title">What is Shout?</h2>
+                    <h5 class="description">Shout is a problem sharing site which allows the “shoutee” to express his life story, to lessen the emotion and receive advices from other user.</h5>
                     <br>
                     {#<a href="#paper-kit" class="btn btn-danger btn-round">See Details</a>#}
                 </div>

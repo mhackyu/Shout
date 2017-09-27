@@ -14,7 +14,19 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
-        return $this->render("default/landing.html.twig");
-//        return $this->redirectToRoute('login');
+        // prevent authenticated user to access landing page.
+        $authChecker = $this->get('security.authorization_checker');
+
+        // get qoute of the day
+        $em = $this->getDoctrine()->getManager();
+        $quote = $em->getRepository('AppBundle:Quote')->quoteOfTheDay();
+
+        if ($authChecker->isGranted("IS_AUTHENTICATED_FULLY")) {
+            return $this->redirectToRoute('shout_list');
+        }
+
+        return $this->render("default/landing.html.twig", [
+            'quote' => $quote
+        ]);
     }
 }

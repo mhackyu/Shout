@@ -25,4 +25,16 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->getQuery()
             ->getOneOrNullResult();
     }
+    public function searchUser($username)
+    {
+        //TODO: dapat yung mga nasesearch ay mga active/enabled users lang.
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT u
+                FROM AppBundle:User u 
+                WHERE u.username LIKE :uname
+            ')
+            ->setParameter('uname', "%" . $username . "%")
+            ->getResult();
+    }
 }

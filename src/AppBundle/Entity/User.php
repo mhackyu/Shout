@@ -126,6 +126,11 @@ class User implements UserInterface, \Serializable
      */
     private $foundHelpful;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\UserReview", mappedBy="user")
+     */
+    private $userReview;
+
     public function __construct()
     {
         $this->isActive = true;
@@ -133,6 +138,7 @@ class User implements UserInterface, \Serializable
         $this->love = new ArrayCollection();
         $this->loud = new ArrayCollection();
         $this->foundHelpful = new ArrayCollection();
+        $this->userReview = new ArrayCollection();
 // may not be needed, see section on salt below
 // $this->salt = md5(uniqid(null, true));
     }
@@ -461,5 +467,21 @@ class User implements UserInterface, \Serializable
     public function setAbout($about)
     {
         $this->about = $about;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserReview()
+    {
+        return $this->userReview;
+    }
+
+    /**
+     * @param mixed $userReview
+     */
+    public function setUserReview($userReview)
+    {
+        $this->userReview = $userReview;
     }
 }

@@ -22,14 +22,21 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ShoutController extends Controller
 {
-
     /**
      * @Route("/", name="shout_list")
      */
     public function listAction(Request $request, Slugger $slugger)
     {
-//        dump($this->getUser());
         $em = $this->getDoctrine()->getManager();
+
+        if ($request->isMethod("GET")) {
+            $search = $request->get('search');
+            if ($search) {
+                $results = $em->getRepository('AppBundle:User')->searchUser($search);
+                dump($results);
+            }
+        }
+
         $shouts = $em->getRepository('AppBundle:Shout')->shouts();
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
