@@ -1,16 +1,15 @@
 
-<!doctype html>
+<!Doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.ico') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Paper Dashboard by Creative Tim</title>
+    <title>{% block title %}{%endblock %} </title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
 
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap1.min.css') }}" rel="stylesheet" />
@@ -46,10 +45,38 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
+                <li>
+                    <a href="/shout/web/app_dev.php/admin">
                         <i class="ti-pie-chart"></i>
                         <p>Dashboard</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="dashboard.html">
+                        <i class="ti-user"></i>
+                        <p>User's Management</p>
+                    </a>
+                </li>
+
+                <li id="nav-shout">
+                    <a href="{{ path('admin_shouts_list') }}">
+                        <i class="ti-file"></i>
+                        <p>Shouts Management</p>
+                    </a>
+                </li>
+
+                <li id="nav-quote">
+                    <a href="{{ path('admin_quotes_list') }}">
+                        <i class="ti-file"></i>
+                        <p>Quote Management</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="dashboard.html">
+                        <i class="ti-file"></i>
+                        <p>Report</p>
                     </a>
                 </li>
 
@@ -107,9 +134,8 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-
-                </div>
+                {% block content%}
+                {%endblock%}
             </div>
         </div>
 
@@ -157,6 +183,8 @@
 
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
+{%block js%} {%endblock%}
+
 
 
 </html>

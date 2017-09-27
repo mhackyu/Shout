@@ -37,6 +37,10 @@ class QuoteRepository extends EntityRepository
                 WHERE q.isQuoteOfTheDay = TRUE
             ')
             ->getResult();
+        
+        if (empty($q)) {
+            return null;
+        } 
         return $q[0];
     }
 }
