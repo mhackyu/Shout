@@ -13,6 +13,13 @@ class DefaultController extends Controller
     public function indexAction()
     {
 //        dump("Asd");die;
+        $em = $this->getDoctrine()->getManager();
+       $users = $em->getRepository('AppBundle:User')
+            ->findAll();
+
         return $this->render('AdminBundle:Default:index.html.twig');
     }
 }
+
+
+
