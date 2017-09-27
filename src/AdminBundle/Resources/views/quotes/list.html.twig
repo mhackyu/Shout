@@ -1,0 +1,50 @@
+{% extends "AdminBundle::base.html.twig" %}
+
+{% block title %}AdminBundle:Quotes:list{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="card card-map">
+		<div class="header">
+            <h4 class="title">Quote Management <div class="pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Quote <span class="ti-plus"></span></button></div></h4>
+            <p class="category">Quotes randomly posted</p>
+       </div>
+
+	<div class="content table-responsive table-full-width">
+		<table class="table table-striped">	
+			<thead>
+			<th>CATEGORY ID</th>
+			<th>CONTENT</th>
+			<th>QUOTATOR</th>
+			<th>QUOTE</th>
+			<th>PUBLISHED</th>
+			</thead>
+
+			<tbody>
+				{% for quote in quotes %}
+				<tr>
+				<td> {{quote.id}} </td>
+				<td> {{quote.content}} </td>
+				<td> {{quote.quoteBy}} </td>
+				<td> {{quote.isQuoteOfTheDay}} </td>
+				<td> {{quote.isPublished}} </td>
+				<td><button class="btn btn-info" data-toggle="modal" data-target="#myModal"> <span class="ti-pencil"></span></button>
+				</td>
+				
+				{% endfor %}
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script> 
+	$('#nav-quote').addClass('active');
+</script>
+{% endblock %}

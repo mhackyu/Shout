@@ -1,0 +1,57 @@
+{% extends "AdminBundle::base.html.twig" %}
+
+{% block title %}AdminBundle:spanhouts:list{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                   <h4 class="title">Shouts List</h4>
+                    <p class="category">shouts can be blocked, delete etc.</p>
+                </div>
+    
+            <div class="content table-responsive table-full-width">
+    	          <table class="table table-hover">
+                  <thead> 
+                     <th>ID</th>
+                     <th>Title</th>
+                     <th>Content</th>
+                     <th>Shoutee</th>
+                     <th>Date Created</th>
+                     <th></th>                                    	  
+                    </thead>			
+		
+       			<tbody>
+				{% for shout in shout %}
+				<tr>
+				<td><a href="{{ path('admin_quotes_list') }}"> {{shout.id}} </td>
+				<td> {{shout.title}} </td>
+				<td> {{shout.body}} </td>
+				<td><a href="{{ path('admin_quotes_list') }}"> {{shout.user.username}} </a></td>
+
+				<td> {{shout.createdAt|date('M d, Y')}} </td>
+				<td> <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">&nbsp;<a href="{{ path('shout_show', {'slug': shout.slug} ) }}">VIEW SHOUT</a></button>
+				</td>
+				
+				{% endfor %}
+				</tr>
+				</tbody>
+
+				</table>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script> 
+	$('#nav-shout').addClass('active');
+</script>
+{% endblock %}
