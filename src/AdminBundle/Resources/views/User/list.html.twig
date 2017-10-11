@@ -1,0 +1,61 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block title %}
+	Users Profile
+{% endblock %}
+
+{% block content %}
+<div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="header">
+                                <h4 class="title">Users </h4>
+                                <p class="category">List of users</p>
+                                <div class="pull-right"><a href="{{path('admin_index')}}"><button class="btn btn-success">Add Administrator +</a></button>
+                                
+                            </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead align="center">
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Enabled</th>
+                                        <th>Role</th>
+                                        <th>Firstname</th>
+                                        <th>Lastname</th>
+                                        <th>Birthdate</th>
+                                        <th>Gender</th>
+                                        <th>Action</th>
+
+                                    </thead>
+                                    <tbody>
+                                        {% for user in users %}
+                                        	<tr align="center">
+                                            <td>{{user.id}}</td>
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.email}}</td>
+                                            <td>{{user.isActive}}</td>
+                                            <td>{{user.roles[0]}}</td>
+                                            <td>{{user.firstName}}</td>
+                                            <td>{{user.lastName}}</td>
+                                            <td>{{user.dob|date('M d, Y')}}</td>
+                                            <td>{{user.gender}}</td>
+                                            <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal"> <span class="ti-pencil"></span></button>
+
+                                            <button class="btn btn-danger"> 
+                                            <span class="ti-trash"></span></button>
+
+                                            </td>
+                
+                                        </tr>
+      
+                                         {% endfor %}                                
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+{% endblock %}
+

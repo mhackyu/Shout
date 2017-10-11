@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,11 +5,10 @@
     <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.ico') }}">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-    <title>Paper Dashboard by Creative Tim</title>
+    <title>{% block title %} {% endblock %}</title>
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
-
 
     <!-- Bootstrap core CSS     -->
     <link href="{{ asset('assets/css/bootstrap1.min.css') }}" rel="stylesheet" />
@@ -34,32 +32,59 @@
     <div class="sidebar" data-background-color="white" data-active-color="danger">
 
         <!--
-            Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
-            Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
-        -->
+-            Tip 1: you can change the color of the sidebar's background using: data-background-color="white | black"
+-            Tip 2: you can change the color of the active button using the data-active-color="primary | info | success | warning | danger"
+-        -->
 
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="http://www.creative-tim.com" class="simple-text">
-                    Creative Tim
+               <a href="{{path('admin_index')}}" class="simple-text">
+                    Shout
                 </a>
             </div>
 
             <ul class="nav">
-                <li class="active">
-                    <a href="dashboard.html">
+                <li>
+                    <a href="{{path('admin_index')}}">
                         <i class="ti-pie-chart"></i>
                         <p>Dashboard</p>
+
                     </a>
                 </li>
+                <li>
+                    <a href="{{path('admin_user')}}">
+                        <i class="ti-user"></i>
+                        <p>Users Management</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{path('admin_shouts_list')}}">
+                        <i class="ti-announcement"></i>
+                        <p>Shouts</p>
 
+                    </a>
+                </li>
+                  <li>
+                    <a href="{{path('admin_quotes_list')}}">
+                        <i class="ti-thought"></i>
+                        <p>Quote of the Day</p>
+
+                    </a>
+                    </li>
+	                <!-- <li>
+                    <a href="reports.html">
+                        <i class="ti-wallet"></i>
+                        <p>Reports</p>
+
+                    </a>
+                </li>-->
             </ul>
         </div>
     </div>
 
-    <div class="main-panel">
+    <div class="main-panel" >
         <nav class="navbar navbar-default">
-            <div class="container-fluid">
+            <div class="container-fluid" style="background-color: #f7765f;">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle">
                         <span class="sr-only">Toggle navigation</span>
@@ -67,33 +92,33 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="#">Template</a>
+                    <a class="navbar-brand" style="color:white;" href="#">Template</a>
                 </div>
                 <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
+                   <ul class="nav navbar-nav navbar-right" >
                         <li>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
                                 <i class="ti-panel"></i>
                                 <p>Stats</p>
                             </a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
                                 <i class="ti-bell"></i>
                                 <p class="notification">5</p>
                                 <p>Notifications</p>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Notification 1</a></li>
-                                <li><a href="#">Notification 2</a></li>
-                                <li><a href="#">Notification 3</a></li>
-                                <li><a href="#">Notification 4</a></li>
-                                <li><a href="#">Another notification</a></li>
+                              <li><a href="#">Notification 1</a></li>
+                              <li><a href="#">Notification 2</a></li>
+                              <li><a href="#">Notification 3</a></li>
+                              <li><a href="#">Notification 4</a></li>
+                              <li><a href="#">Another notification</a></li>
                             </ul>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" style="color:white;">
                                 <i class="ti-settings"></i>
                                 <p>Settings</p>
                             </a>
@@ -107,21 +132,58 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
-
-                </div>
+                {% block content %} {% endblock %}
+                <!-- <div class="row">
+-                    <div class="col-lg-3 col-sm-6">
+-                        <div class="card">
+-                            <div class="content">
+-                                <div class="row">
+-                                    <div class="col-xs-5">
+-                                        <div class="icon-big icon-warning text-center">
+-                                            <i class="ti-server"></i>
+-                                        </div>
+-                                    </div>
+-                                    <div class="col-xs-7">
+-                                        <div class="numbers">
+-                                            <p>Users</p>
+-                                            
+-                                        </div>
+-                                    </div>
+-                                </div>
+-                                <div class="footer">
+-                                    <hr />
+-                                    <div class="stats">
+-                                        <i class="ti-reload"></i> Updated now
+-                                    </div>
+-                                </div>
+-                            </div>
+-                        </div>
+-                    </div>
+-
+-
+-                </div> -->
             </div>
         </div>
 
 
-        <footer class="footer">
+       <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
                     <ul>
 
                         <li>
-                            <a href="#">
-                                Home
+                            <a href="http://www.creative-tim.com">
+                                Creative Tim
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://blog.creative-tim.com">
+                               Blog
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.creative-tim.com/license">
+                                Licenses
                             </a>
                         </li>
                     </ul>
@@ -131,6 +193,8 @@
                 </div>
             </div>
         </footer>
+
+
 
     </div>
 </div>
@@ -157,6 +221,7 @@
 
 <!-- Paper Dashboard Core javascript and methods for Demo purpose -->
 <script src="{{ asset('assets/js/paper-dashboard.js') }}"></script>
+
 
 
 </html>

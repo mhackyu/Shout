@@ -36,6 +36,7 @@ class QuoteRepository extends EntityRepository
                 FROM AppBundle:Quote q 
                 WHERE q.isQuoteOfTheDay = TRUE
             ')
+//<<<<<<< HEAD
             ->getOneOrNullResult();
 //        $q = $this->getEntityManager()
 //            ->createQuery('
@@ -49,5 +50,14 @@ class QuoteRepository extends EntityRepository
 //            return null;
 //        }
 //        return $q[0];
+
+//=======
+//            ->getResult();
+//
+//        if (empty($q)) {
+//            return null;
+//        }
+//        return $q[0];
+//>>>>>>> df6bcee302e4dc7b5ebc4a42d0ef91452746fad8
     }
 }
