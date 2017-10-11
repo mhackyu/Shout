@@ -7,7 +7,8 @@
             {% form_theme form 'bootstrap_3_layout.html.twig' %}
             {{ form_start(form) }}
             {{ form_widget(form) }}
-            <button type="submit" class="btn btn-danger">Shout</button>
+            <button type="submit" class="btn btn-danger"><i class="fa fa-bullhorn"></i> Shout</button>
+            <a href="{{ path('shout_list') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back</a>
             {{ form_end(form) }}
         </div>
     </div>

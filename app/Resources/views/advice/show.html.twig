@@ -10,9 +10,10 @@
                 <form class="p-3" action="" method="post" role="form">
                     <div class="panel-heading">
                         <h4 class="text-center">"{{ shout.title }}"</h4>
-                        <p class="text-center mt-0" style="margin-top: -10px"> by
-                            <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">
-                            <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>
+                        <p class="text-center mt-0" style="margin-top: -10px">
+                            {#by#}
+                            {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
+                            {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
                             <i class="small">{{ shout.createdAt|date() }}</i>
                         </p>
                         <hr>
@@ -24,20 +25,20 @@
                     <div class="panel-footer">
                         <div class="text-center">
 
-                            {% if app.user|isLoud(shout) %}
-                                <span class="btn btn-primary btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Loud</span>
-                            {% else %}
-                                <span class="btn btn-outline-primary btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Loud</span>
-                            {% endif %}
+                            {#{% if app.user|isLoud(shout) %}#}
+                                {#<span class="btn btn-primary btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i> Make it Loud</span>#}
+                            {#{% else %}#}
+                                {#<span class="btn btn-outline-primary btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Make it Loud</span>#}
+                            {#{% endif %}#}
 
-                            {% if app.user|isLove(shout) %}
-                                <span class="btn btn-danger btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>
-                            {% else %}
-                                <span class="btn btn-outline-danger btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart-o" title="love this"></i> Love</span>
-                            {% endif %}
+                            {#{% if app.user|isLove(shout) %}#}
+                                {#<span class="btn btn-danger btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>#}
+                            {#{% else %}#}
+                                {#<span class="btn btn-outline-danger btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart-o" title="love this"></i> Love</span>#}
+                            {#{% endif %}#}
 
                             <div class="mt-3">
-                                <a class="text-danger" href="{{ path('shout_show', {slug: shout.slug}) }}">GIVE ADVICE</a>
+                                <a class="btn btn-success btn-round btn-lg mt-2" href="{{ path('shout_show', {slug: shout.slug}) }}">Give ADVICE</a>
                             </div>
                         </div>
                         <hr>
@@ -49,7 +50,7 @@
                             <img class="img-circle" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 84px; height: 84px;">
                         </a>
                         <div class="media-body">
-                            <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a></h4>
+                            <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a> <div class="badge badge-default">#{{ rank }}</div> </h4>
                             {{ advice.content }}
                             <div>
                                 {% if app.user|is_helpful(advice) %}

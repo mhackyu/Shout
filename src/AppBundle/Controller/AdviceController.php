@@ -49,9 +49,23 @@ class AdviceController extends Controller
      */
     public function showAction(Advice $advice)
     {
+        // This will get the rank of the advice
+        $rank = 1;
+        $em = $this->getDoctrine()->getManager();
+        $topAdvices = $em->getRepository('AppBundle:Advice')
+            ->topAdvicesWithin(new \DateTime("now-1week"), new \DateTime("now"));
+
+        foreach ($topAdvices as $value) {
+            if ($value['id'] == $advice->getId()) {
+                break;
+            }
+            $rank++;
+        }
+
         return $this->render("advice/show.html.twig", [
             'shout' => $advice->getShout(),
-            'advice' => $advice
+            'advice' => $advice,
+            'rank' => $rank
         ]);
     }
 

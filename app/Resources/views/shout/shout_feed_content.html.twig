@@ -1,29 +1,39 @@
+
 {% for shout in shouts %}
     {% set slug = shout.slug %}
     <div class="col-md-6">
-        <div class="card card-danger mb-3">
+        <div class="card card-danger mb-3 animated fadeIn">
             <div class="card-header">
                 {% set user = shout.user.username %}
                 {% set bodyLength = shout.body|length %}
                 <div class="pull-right">
-                    <div class="dropdown">
-                        <button class="btn btn-just-icon btn-outline-default btn-sm dropdown-toggle" id="dropdownMenu1"
-                                data-toggle="dropdown">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-default" role="menu" aria-labelledby="dropdownMenu1">
-                            <li role="presentation" class="dropdown-header">Dropdown header</li>
-                            <li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-                            <li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-                            <li class="dropdown-item" role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Something
-                                    else here</a></li>
-                        </ul>
+                    <div class="shout-main">
+                    <select class="shout-caret">
+                        <option class ="shout-caret-option" value='<span class="caret"></span>'>caret</option>
+                        <option class ="shout-caret-option" value="2">option 1</option>
+                        <option class ="shout-caret-option" value="3">option 1</option>
+                        <option class ="shout-caret-option" value="4">option 1</option>
+                    </select>
                     </div>
+                        {#<div class="dropdown">#}
+                        {#<button class="btn btn-just-icon btn-outline-default btn-sm dropdown-toggle" id="dropdownMenu1"#}
+                                {#data-toggle="dropdown">#}
+                            {#<span class="caret"></span>#}
+                        {#</button>#}
+                        {#<ul class="dropdown-menu dropdown-default" role="menu" aria-labelledby="dropdownMenu1">#}
+                            {#<li role="presentation" class="dropdown-header">Dropdown header</li>#}
+                            {#<li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>#}
+                            {#<li class="dropdown-item" role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>#}
+                            {#<li class="dropdown-item" role="presentation" class="disabled"><a role="menuitem" tabindex="-1" href="#">Something#}
+                                    {#else here</a></li>#}
+                        {#</ul>#}
+                    {#</div>#}
                 </div>
                 <h3 class="card-title">"{{ shout.title }}"</h3>
-                <p style="margin-top: -10px"> by
-                    <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">
-                    <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>
+                <p style="margin-top: -10px">
+                    {#by#}
+                    {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
+                    {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
                     <i class="small">{{ shout.createdAt|date() }}</i>
                 </p>
 
@@ -39,7 +49,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="card-block" style="height: 100px;">
+            <div class="card-block" style="height: 115px;">
                 {% if bodyLength > 220 %}
                     {{ shout.body|slice(0,220) }}...<a href="{{ path('shout_show', {slug: slug}) }}">read more</a>
                 {% else %}
@@ -49,9 +59,9 @@
             <div class="card-footer">
                 <div class="pull-left">
                     {% if app.user|isLoud(shout) %}
-                        <span class="btn btn-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-heart"></i>Loud</span>
+                        <span class="btn btn-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Make it Loud</span>
                     {% else %}
-                        <span class="btn btn-outline-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Loud</span>
+                        <span class="btn btn-outline-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Make it Loud</span>
                     {% endif %}
 
                     {% if app.user|isLove(shout) %}

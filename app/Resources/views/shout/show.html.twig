@@ -10,9 +10,10 @@
                 <form class="p-3" action="" method="post" role="form">
                     <div class="panel-heading">
                         <h4 class="text-center">"{{ shout.title }}"</h4>
-                        <p class="text-center mt-0" style="margin-top: -10px"> by
-                            <img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">
-                            <a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>
+                        <p class="text-center mt-0" style="margin-top: -10px">
+                            {#by#}
+                            {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
+                            {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
                             <i class="small">{{ shout.createdAt|date() }}</i>
                         </p>
                         <hr>
@@ -25,9 +26,9 @@
                         <div class="text-center">
 
                             {% if app.user|isLoud(shout) %}
-                                <span class="btn btn-primary btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Loud</span>
+                                <span class="btn btn-primary btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i> Make It Loud</span>
                             {% else %}
-                                <span class="btn btn-outline-primary btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Loud</span>
+                                <span class="btn btn-outline-primary btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Make It Loud</span>
                             {% endif %}
 
                             {% if app.user|isLove(shout) %}

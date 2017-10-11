@@ -7,16 +7,19 @@
         <div class="col-md-9 bg-faded">
             {#<div class="mb-3"></div>#}
             {# NEW SHOUT #}
-            {% include 'shout/new_shout_content.html.twig' %}
+            {#{% include 'shout/new_shout_content.html.twig' %}#}
 
             {# SHOUTS FEED #}
-            <h4 class="mt-5"><strong>Shouts Feed</strong></h4><hr>
+            <h2 class="mt-5 text-center"><strong>Shouts Feed</strong></h2>
+            <hr>
             <div class="row">
                 {% include 'shout/shout_feed_content.html.twig' %}
             </div>
         </div>
 
         <div class="col-md-3">
+            <div class="text-center" style="margin-top: 34px"><a href="{{ path('shout_new') }}" class="btn btn-primary btn-round btn-lg"><i class="fa fa-plus"></i> New Shout</a></div>
+            <hr>
             {# GET TOP SHOUTS OF THE WEEK #}
             {{ render(controller('AppBundle:Top:topShouts')) }}
             {# GET TOP ADVICES OF THE WEEK #}
