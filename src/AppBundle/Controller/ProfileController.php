@@ -3,8 +3,10 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\UserReview;
 use AppBundle\Form\ChangePasswordFormType;
 use AppBundle\Form\ProfileFormType;
+use AppBundle\Form\UserReviewType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,19 +22,34 @@ class ProfileController extends Controller
     /**
      * @Route("/user/{username}", name="profile_show")
      */
-    public function userAction(User $user)
+    public function userAction(Request $request, User $user)
     {
         if ($user->getId() == $this->getUser()->getId()) {
             return $this->redirectToRoute('my_profile_show');
         }
 
+        $userReview = new UserReview();
         $em = $this->getDoctrine()->getManager();
         $reviews = $em->getRepository('AppBundle:User')
             ->find($user->getId())->getUserReview();
 
+        $form = $this->createForm(UserReviewType::class, $userReview);
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $userReview->setUser($user);
+                $userReview->setReviewedBy($this->getUser());
+                $em->persist($userReview);
+                $em->flush();
+
+                return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
+            }
+        }
+
         return $this->render('profile/show.html.twig', [
             'user' => $user,
-            'reviews' => $reviews
+            'reviews' => $reviews,
+            'form' => $form->createView()
         ]);
     }
 
