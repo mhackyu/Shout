@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Utils\TokenGenerator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,5 +52,14 @@ class RegistrationController extends Controller
         return $this->render('registration/register.html.twig', [
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/check-email", name="registration_check_email")
+     */
+    public function checkEmailAction(TokenGenerator $tokenGenerator)
+    {
+        dump($tokenGenerator->generateConfirmationToken());
+        return $this->render('registration/check_email.html.twig');
     }
 }
