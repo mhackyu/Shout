@@ -30,13 +30,24 @@ class QuoteRepository extends EntityRepository
 
     public function quoteOfTheDay()
     {
-        $q = $this->getEntityManager()
+        return $this->getEntityManager()
             ->createQuery('
                 SELECT q 
                 FROM AppBundle:Quote q 
                 WHERE q.isQuoteOfTheDay = TRUE
             ')
-            ->getResult();
-        return $q[0];
+            ->getOneOrNullResult();
+//        $q = $this->getEntityManager()
+//            ->createQuery('
+//                SELECT q
+//                FROM AppBundle:Quote q
+//                WHERE q.isQuoteOfTheDay = TRUE
+//            ')
+//            ->getOneOrNullResult();
+//
+//        if (empty($q)) {
+//            return null;
+//        }
+//        return $q[0];
     }
 }
