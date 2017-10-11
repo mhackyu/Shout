@@ -6,7 +6,8 @@
 <div class="container-fluid">
    <div class="card card-map">
 		<div class="header">
-            <h4 class="title">Quote Management <div class="pull-right"><button class="btn btn-success" data-toggle="modal" data-target="#myModal">Add Quote <span class="ti-plus"></span></button></div></h4>
+            <h4 class="title">Quote Management <div class="pull-right">
+            <a href="{{path('admin_quotes_new')}}"><button class="btn btn-success">Add Quote <span class="ti-plus"></span></button></a></div></h4>
             <p class="category">Quotes randomly posted</p>
        </div>
 
@@ -16,8 +17,6 @@
 			<th>CATEGORY ID</th>
 			<th>CONTENT</th>
 			<th>QUOTATOR</th>
-			<th>QUOTE</th>
-			<th>PUBLISHED</th>
 			</thead>
 
 			<tbody>
@@ -26,9 +25,11 @@
 				<td> {{quote.id}} </td>
 				<td> {{quote.content}} </td>
 				<td> {{quote.quoteBy}} </td>
-				<td> {{quote.isQuoteOfTheDay}} </td>
-				<td> {{quote.isPublished}} </td>
-				<td><button class="btn btn-info" data-toggle="modal" data-target="#myModal"> <span class="ti-pencil"></span></button>
+				<td><a href="{{ path('admin_quotes_edit', {id:quote.id} ) }} ">
+				<button class="btn btn-info"><span class="ti-pencil"></span></button></a>
+
+				<a href="{{ path('admin_quotes_delete', {id:quote.id} ) }} ">
+				<button class="btn btn-danger"><span class="ti-trash"></span></button></a>
 				</td>
 				
 				{% endfor %}
