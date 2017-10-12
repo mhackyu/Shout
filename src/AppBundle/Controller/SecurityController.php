@@ -36,6 +36,21 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/redirect", name="redirect")
+     */
+    public function redirectAction()
+    {
+        if ($this->getUser()->getRoles()[0] == "ROLE_USER") {
+            return $this->redirectToRoute('shout_list');
+        }
+        else if ($this->getUser()->getRoles()[0] == "ROLE_ADMIN"){
+            return $this->redirectToRoute('admin_index');
+        }
+
+//        return $this->redirectToRoute('homepage');
+    }
+
+    /**
      * @Route("/logout", name="logout")
      */
     public function logoutAction()

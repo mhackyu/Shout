@@ -27,7 +27,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: /shout
+                default_target_path: /redirect
 #                use_forward: true
                 csrf_parameter: _csrf_token
 #                use_referer: true
