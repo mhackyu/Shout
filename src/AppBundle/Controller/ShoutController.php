@@ -107,7 +107,10 @@ class ShoutController extends Controller
 
             //TODO: create a service for profanity filter.
             //Profanity filter for advice.
-            $check = new Check();
+            //This will get all badwords from database.
+            $badWords = $em->getRepository('AppBundle:BadWords')
+                ->getAllBadWords();
+            $check = new Check($badWords);
             $hasProfanity = $check->hasProfanity($advice->getContent());
             if ($hasProfanity) {
                 $this->addFlash('danger', "Your advice contains bad words that can chuchu the shoutee so please .. chuchuchu");
