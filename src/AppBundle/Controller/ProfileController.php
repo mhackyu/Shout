@@ -104,7 +104,7 @@ class ProfileController extends Controller
                 $em->flush();
                 $this->addFlash("success", "Password successfully changed.");
 
-                return $this->redirectToRoute('change_password');
+                return $this->redirectToRoute('shout_list');
             }
             else {
                 $this->addFlash("danger", "Failed to update to update password.");
