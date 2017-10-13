@@ -86,7 +86,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/change-password", name="change_password")
+     * @Route("/change-password", name="user_change_password")
      */
     public function changePassAction(Request $request)
     {

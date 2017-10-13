@@ -105,6 +105,7 @@ class ShoutController extends Controller
             $advice->setUser($this->getUser());
             $em->persist($advice);
             $em->flush();
+            $this->addFlash('success', "Advice successfully posted.");
 
             return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
         }
