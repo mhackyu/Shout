@@ -1,0 +1,17 @@
+{% extends 'AdminBundle::base.html.twig' %}
+
+{% block title %}
+	Edit - User
+{% endblock %}
+
+{% block content %}
+<div class="row">
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {{  form_start(form) }}
+    {{   form_widget(form) }}
+    <button type="submit" class="btn btn-primary"> EDIT USER</button>
+    {{  form_end(form) }}
+
+</div>
+
+{% endblock %}

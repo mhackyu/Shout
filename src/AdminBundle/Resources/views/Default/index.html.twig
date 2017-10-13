@@ -1,8 +1,10 @@
 {% extends 'AdminBundle::base.html.twig' %}
 
 {% block title %}
-    Dashboard
+    Admin
 {% endblock %}
+
+{% block header %}Admin Dashboard{% endblock %}
 
 {% block content %}
     <div class="row">
@@ -187,4 +189,11 @@
 
 
                 </div>
+{% endblock %}
+
+
+{% block js %}
+<script> 
+    $('#nav-home').addClass('active');
+</script>
 {% endblock %}

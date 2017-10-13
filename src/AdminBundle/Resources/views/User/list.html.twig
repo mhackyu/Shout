@@ -4,6 +4,8 @@
 	Users Profile
 {% endblock %}
 
+{% block header %}Manage Users{% endblock %}
+
 {% block content %}
 <div class="row">
                     <div class="col-md-12">
@@ -11,7 +13,7 @@
                             <div class="header">
                                 <h4 class="title">Users </h4>
                                 <p class="category">List of users</p>
-                                <div class="pull-right"><a href="{{path('admin_index')}}"><button class="btn btn-success">Add Administrator +</a></button>
+                                <div class="pull-right"><a href="{{path('admin_user_new')}}"><button class="btn btn-success">Add Administrator +</a></button>
                                 
                             </div>
                             <div class="content table-responsive table-full-width">
@@ -41,10 +43,12 @@
                                             <td>{{user.lastName}}</td>
                                             <td>{{user.dob|date('M d, Y')}}</td>
                                             <td>{{user.gender}}</td>
-                                            <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal"> <span class="ti-pencil"></span></button>
+                                            <td><button class="btn btn-info">
+                                            <a href="{{ path('admin_user_edit', {id:user.id} ) }}"> <span class="ti-pencil"></span></a></button>
 
-                                            <button class="btn btn-danger"> 
-                                            <span class="ti-trash"></span></button>
+                                            <button class="btn btn-danger">
+                                            <a href="{{ path('admin_user_delete', {id:user.id} ) }}">  
+                                            <span class="ti-trash"></span></a></button>
 
                                             </td>
                 
@@ -59,3 +63,8 @@
 
 {% endblock %}
 
+{% block js %}
+<script> 
+    $('#nav-user').addClass('active');
+</script>
+{% endblock %}

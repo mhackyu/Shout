@@ -1,0 +1,50 @@
+{% extends "AdminBundle::base.html.twig" %}
+
+{% block title %}Quotes' List{% endblock %}
+{% block header %}Manage Quote Category{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="card card-map">
+        <div class="header">
+            <h4 class="title">Quote Category Management <div class="pull-right">
+            <a href="{{path('admin_quotecatg_new')}}"><button class="btn btn-success">Add CATEGORY <span class="ti-plus"></span></button></a></div></h4>
+            <p class="category">Add, edit and delete categories of quotes</p>
+       </div>
+
+    <div class="content table-responsive table-full-width">
+        <table class="table table-striped"> 
+            <thead>
+            <th>ID</th>
+            <th>CATEGORY NAME</th>
+            </thead>
+
+            <tbody>
+                {% for quote_category in quote_category %}
+                <tr>
+                <td> {{quote_category.id}} </td>
+                <td> {{quote_category.name}} </td>
+                <td><a href="{{ path('admin_quotecatg_edit', {id:quote_category.id} ) }} ">
+                <button class="btn btn-info"><span class="ti-pencil"></span></button></a>
+
+                <a href="{{ path('admin_quotecatg_delete', {id:quote_category.id} ) }} ">
+                <button class="btn btn-danger"><span class="ti-trash"></span></button></a>
+                </td>
+                
+                {% endfor %}
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script> 
+    $('#nav-quotecatg').addClass('active');
+</script>
+{% endblock %}
