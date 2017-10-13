@@ -44,7 +44,6 @@ class ShoutController extends Controller
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 6)
         );
-//        dump($results);die;
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
 
@@ -74,11 +73,12 @@ class ShoutController extends Controller
         $form = $this->createForm(ShoutType::class, $shout);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $shout->setSlug($slugger->slugify());
+            $shout->setSlug($slugger->slugify($shout->getTitle()));
             $shout->setUser($this->getUser());
             $em = $this->getDoctrine()->getManager();
             $em->persist($shout);
             $em->flush();
+            $this->addFlash('success', "Shout successful");
 
             return $this->redirectToRoute('shout_list');
         }
@@ -128,14 +128,18 @@ class ShoutController extends Controller
     /**
      * @Route("/{slug}/delete", name="shout_delete")
      */
-    public function deleteAction(Shout $shout)
+    public function deleteAction(Request $request, Shout $shout)
     {
-        // add token validation here
+        if (!$this->isCsrfTokenValid('delete', $request->get('token'))) {
+            $this->addFlash('danger', 'Failed to delete shout. Invalid token.');
+            return $this->redirect($request->get('next'));
+        }
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($shout);
         $em->flush();
+        $this->addFlash('success', 'Successfully deleted.');
 
-        return new Response("deleted");
+        return $this->redirect($request->get('next'));
     }
 }
