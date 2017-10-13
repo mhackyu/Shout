@@ -29,15 +29,22 @@ class ShoutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($request->isMethod("GET")) {
-            $search = $request->get('search');
-            if ($search) {
-                $results = $em->getRepository('AppBundle:User')->searchUser($search);
-                dump($results);
-            }
-        }
+//        if ($request->isMethod("GET")) {
+//            $search = $request->get('search');
+//            if ($search) {
+//                $results = $em->getRepository('AppBundle:User')->searchUser($search);
+//                dump($results);
+//            }
+//        }
 
-        $shouts = $em->getRepository('AppBundle:Shout')->shouts();
+        $shouts = $em->getRepository('AppBundle:Shout')->shoutsDQL();
+        $paginator = $this->get('knp_paginator');
+        $results = $paginator->paginate(
+            $shouts,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 6)
+        );
+//        dump($results);die;
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
 
@@ -53,7 +60,7 @@ class ShoutController extends Controller
             }
         }
         return $this->render('shout/list.html.twig', [
-            'shouts' => $shouts,
+            'shouts' => $results,
             'form' => $form->createView()
         ]);
     }
