@@ -22,12 +22,12 @@
                                         <th>ID</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Enabled</th>
                                         <th>Role</th>
                                         <th>Firstname</th>
                                         <th>Lastname</th>
                                         <th>Birthdate</th>
                                         <th>Gender</th>
+                                        <th>Enabled</th>
                                         <th>Action</th>
 
                                     </thead>
@@ -37,16 +37,18 @@
                                             <td>{{user.id}}</td>
                                             <td>{{user.username}}</td>
                                             <td>{{user.email}}</td>
-                                            <td>{{user.isActive}}</td>
                                             <td>{{user.roles[0]}}</td>
                                             <td>{{user.firstName}}</td>
                                             <td>{{user.lastName}}</td>
                                             <td>{{user.dob|date('M d, Y')}}</td>
                                             <td>{{user.gender}}</td>
+                                            <td> <input type="checkbox" data-toggle="switch" checked=""><span class="toggle"></span>
+                                            </td>
+                            
                                             <td><button class="btn btn-info">
                                             <a href="{{ path('admin_user_edit', {id:user.id} ) }}"> <span class="ti-pencil"></span></a></button>
 
-                                            <button class="btn btn-danger">
+                                            <button class="btn btn-danger" onClick="{return validate();}">
                                             <a href="{{ path('admin_user_delete', {id:user.id} ) }}">  
                                             <span class="ti-trash"></span></a></button>
 
@@ -67,4 +69,17 @@
 <script> 
     $('#nav-user').addClass('active');
 </script>
+
+<script language='JavaScript'>
+    function validate()
+    {
+      conf = confirm("Are you sure you want to delete new user?");
+      if (conf)
+        return true;
+      else
+          return false;
+    }
+</script>
+
+
 {% endblock %}
