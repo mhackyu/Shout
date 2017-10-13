@@ -7,7 +7,7 @@
         <div class="media-body">
             <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a>
                 {% if advice.user == app.user %}
-                    <a href="#" class="btn btn-outline-danger btn-round text-danger btn-sm ml-0 pull-right"><i class="fa fa-times"></i> remove</a>
+                    <a href="{{ path('advice_remove', {id: advice.id}) }}" class="btn btn-outline-danger btn-round text-danger btn-sm ml-0 pull-right"><i class="fa fa-times"></i> remove</a>
                 {% endif %}
             </h4>
             {{ advice.content }}
