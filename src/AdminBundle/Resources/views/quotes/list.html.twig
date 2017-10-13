@@ -15,7 +15,7 @@
 	<div class="content table-responsive table-full-width">
 		<table class="table table-striped">	
 			<thead>
-			<th>CATEGORY ID</th>
+			<th>QUOTE ID</th>
 			<th>CONTENT</th>
 			<th>QUOTATOR</th>
 			</thead>
@@ -30,7 +30,7 @@
 				<button class="btn btn-info"><span class="ti-pencil"></span></button></a>
 
 				<a href="{{ path('admin_quotes_delete', {id:quote.id} ) }} ">
-				<button class="btn btn-danger"><span class="ti-trash"></span></button></a>
+				<button class="btn btn-danger"><span class="ti-trash" onClick="{return validate();}"></span></button></a>
 				</td>
 				
 				{% endfor %}
@@ -49,4 +49,15 @@
 <script> 
 	$('#nav-quote').addClass('active');
 </script>
+
+<script language='JavaScript'>
+    function validate()
+    {
+      conf = confirm("Are you sure you want to delete quote category?");
+      if (conf)
+        return true;
+      else
+          return false;
+    }
+  </script>
 {% endblock %}

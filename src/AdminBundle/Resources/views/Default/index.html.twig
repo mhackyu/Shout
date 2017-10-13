@@ -16,12 +16,14 @@
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-warning text-center">
                                             <i class="ti-user"></i>
-                                        </div>
+                                       </div>
+                                        <a href="{{path('admin_user')}}" title="User Management">
+                   
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers" >
 
-                                      		<p>Users</p>
+                                      		<p style="color:black">Users</p>
                                       		 {{users}}
 											 
                                             
@@ -31,7 +33,8 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-reload"></i> Updated now
+                                        <i class="ti-reload"></i>
+                                         Update Users </a>
                                     </div>
                                 </div>
                             </div>
@@ -46,10 +49,13 @@
                                         <div class="icon-big icon-success text-center">
                                             <i class="ti-announcement"></i>
                                         </div>
+                                         <a href="{{path('admin_shouts_list')}}" title="Shout Management">
+                   
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Shouts</p>
+                                            <p style="color:black">Shouts</p>
+
                                             {{shouts}}
                                            
                                         </div>
@@ -58,7 +64,9 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-calendar"></i> Last day
+                                        <i class="ti-calendar"></i> 
+                                        
+                                        Update Shouts
                                     </div>
                                 </div>
                             </div>
@@ -71,11 +79,13 @@
                                     <div class="col-xs-5">
                                         <div class="icon-big icon-danger text-center">
                                             <i class="ti-thought"></i>
+                                              <a href="{{path('admin_quotes_list')}}" title="Quote Management">
+                    
                                         </div>
                                     </div>
                                     <div class="col-xs-7">
                                         <div class="numbers">
-                                            <p>Quotes</p>
+                                            <p style="color:black">Quotes</p>
                                             {{quotes}}
                                         </div>
                                     </div>
@@ -83,7 +93,9 @@
                                 <div class="footer">
                                     <hr />
                                     <div class="stats">
-                                        <i class="ti-timer"></i> In the last hour
+                                        <i class="ti-timer"></i> 
+                                      
+                                        Update Quotes
                                     </div>
                                 </div>
                             </div>
@@ -114,7 +126,7 @@
                             </div>
                         </div>
                     </div>
-                	<div class="row">
+                	{#<div class="row">
 						<div class="col-md-12">
                         	<div class="card">
                            		 <div class="header">
@@ -184,7 +196,7 @@
                             </div>
                         </div>
                     </div>
-
+#}
 
 
 
