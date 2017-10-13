@@ -7,6 +7,7 @@ use AppBundle\Entity\Shout;
 use AppBundle\Form\AdviceFormType;
 use AppBundle\Form\ShoutType;
 use AppBundle\Utils\Slugger;
+use mofodojodino\ProfanityFilter\Check;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -96,15 +97,30 @@ class ShoutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $advice = new Advice();
+        if ($this->get('session')->has('adv')) {
+            $advice->setContent($this->get('session')->get('adv'));
+        }
         $form = $this->createForm(AdviceFormType::class, $advice);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //TODO: create a service for profanity filter.
+            //Profanity filter for advice.
+            $check = new Check();
+            $hasProfanity = $check->hasProfanity($advice->getContent());
+            if ($hasProfanity) {
+                $this->addFlash('danger', "Your advice contains bad words that can chuchu the shoutee so please .. chuchuchu");
+                $this->get('session')->set('adv', $advice->getContent());
+                return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
+            }
             $advice->setShout($shout);
             $advice->setUser($this->getUser());
             $em->persist($advice);
             $em->flush();
+            if ($this->get('session')->has('adv')) {
+                $this->get('session')->remove('adv');
+            }
             $this->addFlash('success', "Advice successfully posted.");
 
             return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
@@ -122,7 +138,7 @@ class ShoutController extends Controller
         return $this->render('shout/show.html.twig', [
             'shout' => $shout,
             'advices' => $advices,
-            'form' => $form->createView()
+            'form' => $form->createView(),
         ]);
     }
 

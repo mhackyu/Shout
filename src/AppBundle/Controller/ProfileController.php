@@ -63,8 +63,10 @@ class ProfileController extends Controller
         $user = $this->getUser();
         $form = $this->createForm(ProfileFormType::class, $user);
         if ($request->isMethod("POST")) {
+//            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
             $form->handleRequest($request);
-            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
+//            dump($user);
+
             dump($user);
             if ($form->isSubmitted() && $form->isValid()) {
 //                $encodedPass = $this->get('security.password_encoder')
