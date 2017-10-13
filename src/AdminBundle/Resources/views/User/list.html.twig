@@ -42,7 +42,16 @@
                                             <td>{{user.lastName}}</td>
                                             <td>{{user.dob|date('M d, Y')}}</td>
                                             <td>{{user.gender}}</td>
-                                            <td> <input type="checkbox" data-toggle="switch" checked=""><span class="toggle"></span>
+                                            <td> 
+                                            <input class="form-check-input enabled" 
+                                            style="
+                                            -ms-transform: scale(1.5); /* IE */ 
+                                            -moz-transform: scale(1.5); /* FF */  
+                                            -webkit-transform: scale(1.5); /* Safari and Chrome */ 
+                                            -o-transform: scale(1.5); /* Opera */  
+                                            padding: 15px;"
+                                            
+                                            type="checkbox" {%if user.enabled %} checked {% endif %} data-id="{{user.id }}">
                                             </td>
                             
                                             <td><button class="btn btn-info">
@@ -78,6 +87,35 @@
         return true;
       else
           return false;
+    }
+</script>
+
+<script>
+    $('.enabled').on("click", function() {
+    if(this.checked) {
+        console.log($(this).data('id'));
+        mark($(this).data('id'), 1);
+    }
+    else {
+        console.log($(this).data('id'));
+        mark($(this).data('id'), 0);
+    }
+    });
+
+    function mark(id, isEnabled)
+    {
+        $.ajax({
+            url:"user/"+id+"/enabled",
+            data: {isEnabled: isEnabled},
+            type: "POST",
+            error: function() {
+                alert("Failed Request");                
+            }
+        })
+
+
+
+
     }
 </script>
 
