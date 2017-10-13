@@ -55,7 +55,7 @@ class DefaultController extends Controller
          )
          */
 
-        $info = $mailer->send($message);
+        $mailer->send($message);
 
 
         dump($mailer);die;

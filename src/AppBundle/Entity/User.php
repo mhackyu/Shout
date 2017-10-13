@@ -538,4 +538,12 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
     {
         $this->confirmationToken = $confirmationToken;
     }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
 }

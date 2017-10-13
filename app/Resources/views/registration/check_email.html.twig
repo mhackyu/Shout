@@ -4,6 +4,67 @@
 {% endblock %}
 
 {% block content %}
-    Thank you for...
+    <nav class="navbar navbar-toggleable-md fixed-top navbar-ct-danger" color-on-scroll="300">
+        <div class="container">
+            <div class="navbar-translate">
+                <button class="navbar-toggler navbar-toggler-right navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                    <span class="navbar-toggler-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ path('homepage') }}">Shout!</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main">
+        <div class="section text-center">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 offset-md-2" style="margin-top: 200px;">
+                        <h2 class="title">Confirm your email</h2>
+                        <h5 class="description">We sent you a confirmation in your email: {{ email }}.</h5>
+                        <br>
+                        <a href="{{ path('registration_check_email')}}?u={{ username }}" class="btn btn-danger btn-round">Resend Confirmation</a>
+                    </div>
+                </div>
+                <br/><br/>
+            </div>
+        </div>
+    </div>
+    <footer class="footer section-dark">
+        <div class="container">
+            <div class="row">
+                <nav class="footer-nav">
+                    <ul>
+                        <li><a href="#">Shout Team</a></li>
+                        {#<li><a href="http://blog.creative-tim.com">Blog</a></li>#}
+                        {#<li><a href="https://www.creative-tim.com/license">Licenses</a></li>#}
+                    </ul>
+                </nav>
+                <div class="credits ml-auto">
+					<span class="copyright">
+						© <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by Shout Team
+					</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+                    {#<div class="section landing-section">#}
+                        {#<div class="container">#}
+                            {#<div class="row">#}
+                                {#<div class="col-md-8 offset-md-2">#}
+                                    {#<h2 class="text-center">We sent you a confirmation email</h2>#}
+                                    {#<div class="row">#}
+                                        {#<div class="col-md-4 offset-md-4 mt-3">#}
+                                            {#<button class="btn btn-danger btn-lg btn-fill">Resend Confirmation</button>#}
+                                        {#</div>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+
 {% endblock %}
 

@@ -21,7 +21,7 @@ class UserController extends Controller
         $users = $em->getRepository('AppBundle:User')
             ->findAll();
 
-        return $this->render('AdminBundle:user:list.html.twig', [
+        return $this->render('AdminBundle:User:list.html.twig', [
         	'users' => $users
         	]);
     }
@@ -36,6 +36,12 @@ class UserController extends Controller
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid())
         {
+            // Encode plain password
+            $password = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($password);
+            $user->setEnabled(true);
+            $user->setRole("ROLE_ADMIN");
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -60,7 +66,7 @@ class UserController extends Controller
             $em->flush();
             return $this->redirectToRoute('admin_user');
         }
-        return $this->render('AdminBundle:user:edit.html.twig', [
+        return $this->render('AdminBundle:User:edit.html.twig', [
                 'form'=> $form->createView()
             ]);
     }

@@ -6,3 +6,22 @@
     float: left;
     width: 71%
 }
+
+.shout-caret {
+    background-color: transparent;
+    border-color: transparent;
+    width: 20px;
+}
+
+.shout-caret-option {
+    background-color: whitesmoke;
+}
+
+.shout-main {
+    background-color: whitesmoke;
+}
+
+.shout-main option {
+    border-color: red;
+    border-radius: 100px;
+}
