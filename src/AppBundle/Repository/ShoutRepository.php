@@ -66,4 +66,16 @@ class ShoutRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('end', $end)
             ->getResult();
     }
+
+    public function findShoutByTitle($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT s
+                FROM AppBundle:Shout s
+                WHERE s.title LIKE :str
+            ')
+            ->setParameter("str","%".$str."%")
+            ->getResult();
+    }
 }

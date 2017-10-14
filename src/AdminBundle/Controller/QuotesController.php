@@ -15,12 +15,14 @@ class QuotesController extends Controller
     /**
      * @Route("admin/quotes", name="admin_quotes_list")
      */
-    public function listAction()
+    public function listAction(Request $request)
     {
     	$em = $this->getDoctrine()->getManager();
-    	$quotes = $em->getRepository('AppBundle:Quote')->findAll();
+        $quotes = $em->getRepository('AppBundle:Quote')->findQuoteByContent($request->get('search'));
+    	//$quotes = $em->getRepository('AppBundle:Quote')->findAll();
         return $this->render('AdminBundle:quotes:list.html.twig', [
-        	'quotes' => $quotes 
+        	'quotes' => $quotes , 
+            'search' => $request->get('search')
         ]);
     }
 
@@ -81,12 +83,13 @@ class QuotesController extends Controller
      /**
      * @Route("admin/quotecatg", name="admin_quotecatg_list")
      */
-    public function listquoteAction()
+    public function listquoteAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $quote_category = $em->getRepository('AppBundle:QuoteCategory')->findAll();
+        $quote_category = $em->getRepository('AppBundle:Quote')->findQuoteByCategoryName($request->get('search'));
         return $this->render('AdminBundle:quotes:quotecatg.html.twig', [
-            'quote_category' => $quote_category
+            'quote_category' => $quote_category,
+            'search' => $request->get('search')
         ]);
     }
 
@@ -142,6 +145,25 @@ class QuotesController extends Controller
             ]);
     }
 
+     /**
+     * @Route("admin/search", name="admin_quotes_search")
+     */
+    public function searchquoteAction()
+     {
 
+        $em = $this->getDoctrine()->getManager();
+        $results = $em->getRepository('AppBundle:Quote')->findQuoteByContent("love");
+        dump($results);die;
 
+        if ($request->isMethod("GET")) {
+            $search = $request->get('search');
+            if ($search) {
+                $results = $em->getRepository('AppBundle:Quote')->findQuoteByContent($search);
+               
+                return $this->render('AdminBundle:quotes:list.html.twig', [
+                'search'=> $search
+            ]);
+            }
+            }
+        }
 }

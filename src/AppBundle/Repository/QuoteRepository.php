@@ -60,4 +60,29 @@ class QuoteRepository extends EntityRepository
 //        return $q[0];
 //>>>>>>> df6bcee302e4dc7b5ebc4a42d0ef91452746fad8
     }
+
+
+    public function findQuoteByContent($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT q
+                FROM AppBundle:Quote q
+                WHERE q.content LIKE :str
+            ')
+            ->setParameter("str","%".$str."%")
+            ->getResult();
+    }
+
+     public function findQuoteByCategoryName($str)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT qc
+                FROM AppBundle:QuoteCategory qc
+                WHERE qc.name LIKE :str
+            ')
+            ->setParameter("str","%".$str."%")
+            ->getResult();
+    }
 }

@@ -14,15 +14,16 @@ class UserController extends Controller
 	/**
 	 * @Route("admin/user", name="admin_user")
      */
-    public function userAction()
+    public function userAction(Request $request)
     {
 //        dump("Asd");die;
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')
-            ->findAll();
+        $users = $em->getRepository('AppBundle:User')->findUserByUsername($request->get('search'));
+            
 
         return $this->render('AdminBundle:User:list.html.twig', [
-        	'users' => $users
+        	'users' => $users,
+            'search' => $request->get('search')
         	]);
     }
 
