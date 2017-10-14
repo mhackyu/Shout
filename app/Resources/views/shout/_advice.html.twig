@@ -2,7 +2,7 @@
 {% for advice in advices %}
     <div class="media mt-3 mb-3">
         <a class="media-left mr-2" href="#">
-            <img class="img-rounded" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 64px; height: 64px;">
+            <img class="img-rounded" src="{{ asset('assets/img/') }}{{ advice.user.avatar }}" style="width: 64px; height: 64px;">
         </a>
         <div class="media-body">
             <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a>
