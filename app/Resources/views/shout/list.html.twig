@@ -12,9 +12,19 @@
             {# SHOUTS FEED #}
             <h2 class="mt-5 text-center"><strong>Shouts Feed</strong></h2>
             <hr>
+            {#<div class="row">#}
+
+            {#</div>#}
             <div class="row">
                 {% include 'shout/shout_feed_content.html.twig' %}
             </div>
+            <hr>
+            <div class="pull-right mt-1">
+                <div class="navigation">
+                    {{ knp_pagination_render(shouts) }}
+                </div>
+            </div>
+
         </div>
 
         <div class="col-md-3">

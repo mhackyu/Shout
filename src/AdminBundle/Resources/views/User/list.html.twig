@@ -38,12 +38,12 @@
                                         <th>ID</th>
                                         <th>Username</th>
                                         <th>Email</th>
-                                        <th>Enabled</th>
                                         <th>Role</th>
                                         <th>Firstname</th>
                                         <th>Lastname</th>
                                         <th>Birthdate</th>
                                         <th>Gender</th>
+                                        <th>Enabled</th>
                                         <th>Action</th>
 
                                     </thead>
@@ -53,16 +53,27 @@
                                             <td>{{user.id}}</td>
                                             <td>{{user.username}}</td>
                                             <td>{{user.email}}</td>
-                                            <td>{{user.isActive}}</td>
                                             <td>{{user.roles[0]}}</td>
                                             <td>{{user.firstName}}</td>
                                             <td>{{user.lastName}}</td>
                                             <td>{{user.dob|date('M d, Y')}}</td>
                                             <td>{{user.gender}}</td>
+                                            <td> 
+                                            <input class="form-check-input enabled" 
+                                            style="
+                                            -ms-transform: scale(1.5); /* IE */ 
+                                            -moz-transform: scale(1.5); /* FF */  
+                                            -webkit-transform: scale(1.5); /* Safari and Chrome */ 
+                                            -o-transform: scale(1.5); /* Opera */  
+                                            padding: 15px;"
+                                            
+                                            type="checkbox" {%if user.enabled %} checked {% endif %} data-id="{{user.id }}">
+                                            </td>
+                            
                                             <td><button class="btn btn-info">
                                             <a href="{{ path('admin_user_edit', {id:user.id} ) }}"> <span class="ti-pencil"></span></a></button>
 
-                                            <button class="btn btn-danger">
+                                            <button class="btn btn-danger" onClick="{return validate();}">
                                             <a href="{{ path('admin_user_delete', {id:user.id} ) }}">  
                                             <span class="ti-trash"></span></a></button>
 
@@ -87,4 +98,46 @@
 <script> 
     $('#nav-user').addClass('active');
 </script>
+
+<script language='JavaScript'>
+    function validate()
+    {
+      conf = confirm("Are you sure you want to delete new user?");
+      if (conf)
+        return true;
+      else
+          return false;
+    }
+</script>
+
+<script>
+    $('.enabled').on("click", function() {
+    if(this.checked) {
+        console.log($(this).data('id'));
+        mark($(this).data('id'), 1);
+    }
+    else {
+        console.log($(this).data('id'));
+        mark($(this).data('id'), 0);
+    }
+    });
+
+    function mark(id, isEnabled)
+    {
+        $.ajax({
+            url:"user/"+id+"/enabled",
+            data: {isEnabled: isEnabled},
+            type: "POST",
+            error: function() {
+                alert("Failed Request");                
+            }
+        })
+
+
+
+
+    }
+</script>
+
+
 {% endblock %}

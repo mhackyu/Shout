@@ -42,7 +42,10 @@
 		<table class="table table-striped">	
 			<thead>
 			<th>QUOTE ID</th>
+<<<<<<< HEAD
 			<th>CATEGORY</th>
+=======
+>>>>>>> f19dd8fbaebdf3b5fa19cf4ca9b89eaf5c8edae6
 			<th>CONTENT</th>
 			<th>QUOTATOR</th>
 			
@@ -60,7 +63,7 @@
 				<button class="btn btn-info"><span class="ti-pencil"></span></button></a>
 
 				<a href="{{ path('admin_quotes_delete', {id:quote.id} ) }} ">
-				<button class="btn btn-danger"><span class="ti-trash"></span></button></a>
+				<button class="btn btn-danger"><span class="ti-trash" onClick="{return validate();}"></span></button></a>
 				</td>
 				
 				 {% else %}
@@ -83,4 +86,15 @@
 <script> 
 	$('#nav-quote').addClass('active');
 </script>
+
+<script language='JavaScript'>
+    function validate()
+    {
+      conf = confirm("Are you sure you want to delete quote category?");
+      if (conf)
+        return true;
+      else
+          return false;
+    }
+  </script>
 {% endblock %}

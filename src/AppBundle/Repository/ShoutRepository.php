@@ -15,6 +15,20 @@ class ShoutRepository extends \Doctrine\ORM\EntityRepository
      * @param $user
      * @return array
      */
+    public function shoutsDQL()
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+              SELECT u FROM AppBundle:Shout u
+              ORDER BY u.createdAt DESC  
+            ');
+    }
+
+    /**
+     * Get all shouts except of the current user
+     * @param $user
+     * @return array
+     */
     public function shouts()
     {
         return $this->getEntityManager()

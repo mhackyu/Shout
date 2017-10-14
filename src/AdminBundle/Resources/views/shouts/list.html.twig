@@ -10,6 +10,7 @@
             <div class="card">
                 <div class="header">
                    <h4 class="title">Shouts List</h4>
+<<<<<<< HEAD
                     <p class="category">shouts can be blocked, delete etc.</p>
                 </div>
 
@@ -26,6 +27,9 @@
                                 <i> results for <b> "{{search}}" </b> </i> 
                                 {% endif %}
                              </div>
+=======
+                    </div>
+>>>>>>> f19dd8fbaebdf3b5fa19cf4ca9b89eaf5c8edae6
     
             <div class="content table-responsive table-full-width">
     	          <table class="table table-hover">
@@ -33,7 +37,6 @@
                      <th>ID</th>
                      <th>Title</th>
                      <th>Content</th>
-                     <th>Shoutee</th>
                      <th>Date Created</th>
                      <th></th>                                    	  
                     </thead>			
@@ -41,10 +44,9 @@
        			<tbody>
 				{% for shout in shout %}
 				<tr>
-				<td><a href="{{ path('admin_quotes_list') }}"> {{shout.id}} </td>
+				<td> {{shout.id}} </td>
 				<td> {{shout.title}} </td>
 				<td> {{shout.body}} </td>
-				<td><a href="{{ path('admin_quotes_list') }}"> {{shout.user.username}} </a></td>
 
 				<td> {{shout.createdAt|date('M d, Y')}} </td>
 				<td> <button class="btn btn-warning" data-toggle="modal" data-target="#myModal">&nbsp;<a href="{{ path('shout_show', {'slug': shout.slug} ) }}">VIEW SHOUT</a></button>

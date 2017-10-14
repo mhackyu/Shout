@@ -1,0 +1,43 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Search result for "{{ app.request.get('search') }}"
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8 offset-2 mt-5">
+            <h4 class="mb-3"><i>Result for</i> <b> "{{ app.request.get('search') }}"</b></h4>
+            <hr>
+            {% for user in shoutees %}
+                <div class="card card-danger mb-3 animated fadeIn">
+                    {#<div class="card-header">#}
+                        {#<h3 class="card-title">"{{ user.username }}"</h3>#}
+                    {#</div>#}
+                    <div class="card-block" style="height: 115px;">
+                        <div class="media mt-3 mb-3">
+                            <a class="media-left mr-2" href="#">
+                                <img class="img-rounded" src="{{ asset('assets/img/') }}{{ user.avatar }}" style="width: 128px; height: 128px;">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: user.username}) }}">{{ user.username }}</a></h4>
+                                {#{{ user.about }}#}
+                                Total Reviews: {{ user.userReview.count }}
+                                <div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="pull-right">
+                            <a class="btn btn-outline-primary btn-round" href="{{ path('profile_show', {username: user.username}) }}"><i
+                                        class="fa fa-user"></i> View Profile</a>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+

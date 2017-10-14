@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -84,7 +85,22 @@ class UserController extends Controller
             $em->flush();
             return $this->redirectToRoute('admin_user');
         
-    }    
+    } 
+
+    /**
+     * @Route("admin/user/{id}/enabled", name="admin_user_enabled")
+     */
+
+    public function enableAction(User $user, Request $request)
+    {
+       if($request->isXmlHttpRequest()){
+         $em = $this-> getDoctrine()->getManager();
+         $user->setEnabled($request->request->get('isEnabled'));
+         $em->flush();
+
+       }
+        return new Response("toggle");
+    }
 
 
 

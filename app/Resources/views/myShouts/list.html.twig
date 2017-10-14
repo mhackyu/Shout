@@ -13,30 +13,26 @@
     <hr>
     <div class="row">
         {#{% include 'shout/shout_feed_content.html.twig' %}#}
-
-        {% for shout in shouts %}
-            {% set slug = shout.slug %}
-            <div class="col-md-6 offset-md-3">
+        <div class="col-md-6 offset-md-3">
+            {% for shout in shouts %}
+                {% set slug = shout.slug %}
                 <div class="card card-danger mb-3 animated fadeIn">
                     <div class="card-header">
                         {% set user = shout.user.username %}
                         {% set bodyLength = shout.body|length %}
                         <div class="pull-right">
-                            <div class="shout-main">
-                                <select class="shout-caret">
-                                    <option class ="shout-caret-option" value='<span class="caret"></span>'>caret</option>
-                                    <option class ="shout-caret-option" value="2">option 1</option>
-                                    <option class ="shout-caret-option" value="3">option 1</option>
-                                    <option class ="shout-caret-option" value="4">option 1</option>
-                                </select>
+                            <div class="dropdown">
+                                <button class="btn btn-drp dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item drp-item" href="{{ path('shout_delete', {slug: slug}) }}?next={{ path('my_shout_list') }}&token={{ csrf_token('delete') }}"><i class="fa fa-times"></i> Delete</a>
+                                    {#<a class="dropdown-item drp-item" href="#">Another action</a>#}
+                                    {#<a class="dropdown-item drp-item" href="#">Something else here</a>#}
+                                </div>
                             </div>
 
                         </div>
                         <h3 class="card-title">"{{ shout.title }}"</h3>
                         <p style="margin-top: -10px">
-                            {#by#}
-                            {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
-                            {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
                             <i class="small">{{ shout.createdAt|date() }}</i>
                         </p>
 
@@ -53,33 +49,38 @@
                         </ul>
                     </div>
                     <div class="card-block" style="height: 100px;">
-                        {% if bodyLength > 220 %}
-                            {{ shout.body|slice(0,220) }}...<a href="{{ path('shout_show', {slug: slug}) }}"><b>view more</b></a>
-                        {% else %}
-                            {{ shout.body }}...<a href="{{ path('shout_show', {slug: slug}) }}"><b>view more</b></a>
-                        {% endif %}
+                        {{ shout.body }}
+                        {#{% if bodyLength > 220 %}#}
+                            {#{{ shout.body|slice(0,220) }}...<a href="{{ path('shout_show', {slug: slug}) }}"><b>view more</b></a>#}
+                        {#{% else %}#}
+                            {#{{ shout.body }}...<a href="{{ path('shout_show', {slug: slug}) }}"><b>view more</b></a>#}
+                        {#{% endif %}#}
                     </div>
                     <div class="card-footer">
-                        <div class="pull-left">
-                            {% if app.user|isLoud(shout) %}
-                                <span class="btn btn-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Make it Loud</span>
-                            {% else %}
-                                <span class="btn btn-outline-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Make it Loud</span>
-                            {% endif %}
-
-                            {% if app.user|isLove(shout) %}
-                                <span class="btn btn-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>
-                            {% else %}
-                                <span class="btn btn-outline-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart" title="love this"></i> Love</span>
-                            {% endif %}
+                        <div class="pull-right">
+                            <a href="{{ path('shout_show', {slug: slug}) }}" class="btn btn-outline-primary btn-round"><i class="fa fa-info-circle"></i> View</a>
                         </div>
-                        {#<div class="pull-right">#}
-                            {#<a class="btn btn-outline-primary btn-round" href="{{ path('shout_show', {slug: slug}) }}">View More</a>#}
+                        {#<div class="pull-left">#}
+                            {#{% if app.user|isLoud(shout) %}#}
+                                {#<span class="btn btn-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="true"><i class="fa fa-bullhorn"></i>Make it Loud</span>#}
+                            {#{% else %}#}
+                                {#<span class="btn btn-outline-primary btn-sm btn-loud" data-id="{{ slug }}" data-is-loud="false"><i class="fa fa-bullhorn" title="loud this"></i> Make it Loud</span>#}
+                            {#{% endif %}#}
+
+                            {#{% if app.user|isLove(shout) %}#}
+                                {#<span class="btn btn-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="true"><i class="fa fa-heart"></i>Love</span>#}
+                            {#{% else %}#}
+                                {#<span class="btn btn-outline-danger btn-sm btn-love" data-id="{{ slug }}" data-is-love="false"><i class="fa fa-heart" title="love this"></i> Love</span>#}
+                            {#{% endif %}#}
                         {#</div>#}
                     </div>
                 </div>
+
+            {% endfor %}
+            <div class="pull-right">
+                {{ knp_pagination_render(shouts) }}
             </div>
-        {% endfor %}
+        </div>
     </div>
 {% endblock %}
 

@@ -90,11 +90,11 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
      */
     private $lastName;
 
-    /**
-     * @ORM\Column(type="date")
-     * @Assert\Date()
-     */
-    private $dob;
+//    /**
+//     * @ORM\Column(type="date")
+//     * @Assert\Date()
+//     */
+//    private $dob;
 
     /**
      * @ORM\Column(type="string", length=6)
@@ -419,21 +419,21 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
         $this->lastName = $lastName;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getDob()
-    {
-        return $this->dob;
-    }
-
-    /**
-     * @param mixed $dob
-     */
-    public function setDob($dob)
-    {
-        $this->dob = $dob;
-    }
+//    /**
+//     * @return mixed
+//     */
+//    public function getDob()
+//    {
+//        return $this->dob;
+//    }
+//
+//    /**
+//     * @param mixed $dob
+//     */
+//    public function setDob($dob)
+//    {
+//        $this->dob = $dob;
+//    }
 
     /**
      * @return mixed
