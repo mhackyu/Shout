@@ -1,13 +1,13 @@
 
 {% for shout in shouts %}
     {% set slug = shout.slug %}
-    <div class="col-md-6">
+    <div class="col-md-12">
         {#{{ path('app_loud_new', {slug: shout.slug}) }}#}
         <div class="card card-danger mb-3 animated fadeIn">
             <div class="card-header">
                 {% set user = shout.user.username %}
                 {% set bodyLength = shout.body|length  %}
-                <h3 class="card-title">"{{ shout.title }}"</h3>
+                <h4 class="card-title">"{{ shout.title }}"</h4>
                 <p style="margin-top: -10px">
                     {#by#}
                     {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}

@@ -2,19 +2,15 @@
 
 {% block content %}
     <div class="row">
-        {#<div class="col-md-3">#}
-        {#</div>#}
         <div class="col-md-9 bg-faded">
-            {#<div class="mb-3"></div>#}
-            {# NEW SHOUT #}
-            {#{% include 'shout/new_shout_content.html.twig' %}#}
-
             {# SHOUTS FEED #}
             <h2 class="mt-5 text-center"><strong>Shouts Feed</strong></h2>
             <hr>
-            {#<div class="row">#}
-
-            {#</div>#}
+            <div class="row">
+                <div class="text-center">
+                    Filter problems by
+                </div>
+            </div>
             <div class="row">
                 {% include 'shout/shout_feed_content.html.twig' %}
             </div>

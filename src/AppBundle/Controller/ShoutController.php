@@ -30,14 +30,6 @@ class ShoutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-//        if ($request->isMethod("GET")) {
-//            $search = $request->get('search');
-//            if ($search) {
-//                $results = $em->getRepository('AppBundle:User')->searchUser($search);
-//                dump($results);
-//            }
-//        }
-
         $shouts = $em->getRepository('AppBundle:Shout')->shoutsDQL();
         $paginator = $this->get('knp_paginator');
         $results = $paginator->paginate(

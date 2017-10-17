@@ -28,7 +28,7 @@ class Shout
      *
      * @ORM\Column(name="title", type="string", length=255)
      * @Assert\NotBlank()
-     * @Assert\Length(min="3", max="25")
+     * @Assert\Length(min="3", max="100")
      */
     private $title;
 
@@ -58,6 +58,7 @@ class Shout
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="shout")
+     * @Assert\Valid()
      */
     private $user;
 
@@ -76,6 +77,12 @@ class Shout
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Loud", mappedBy="shout")
      */
     private $loud;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ShoutCategory", inversedBy="shout")
+     * @Assert\Valid()
+     */
+    private $shoutCategory;
 
     public function __construct()
     {
@@ -253,6 +260,22 @@ class Shout
     public function setAdvice($advice)
     {
         $this->advice = $advice;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShoutCategory()
+    {
+        return $this->shoutCategory;
+    }
+
+    /**
+     * @param mixed $shoutCategory
+     */
+    public function setShoutCategory($shoutCategory)
+    {
+        $this->shoutCategory = $shoutCategory;
     }
 
 }

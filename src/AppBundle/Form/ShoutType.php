@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -27,6 +28,11 @@ class ShoutType extends AbstractType
                     'placeholder' => 'What you want to shout?',
                     'style' => 'height: 150px'
                 ]
+            ])
+            ->add('shoutCategory', EntityType::class, [
+                'label' => 'Type of Problem',
+                'class' => 'AppBundle\Entity\ShoutCategory',
+                'choice_label' => 'name'
             ]);
     }
     
