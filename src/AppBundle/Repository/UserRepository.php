@@ -31,9 +31,10 @@ class UserRepository extends EntityRepository implements UserLoaderInterface
             ->createQuery('
                 SELECT u
                 FROM AppBundle:User u 
-                WHERE u.username LIKE :uname AND u.enabled = TRUE
+                WHERE u.username LIKE :uname AND u.enabled = TRUE AND u.role = :role
             ')
             ->setParameter('uname', "%" . $username . "%")
+            ->setParameter('role', "ROLE_USER")
             ->getResult();
     }
 
