@@ -1,10 +1,11 @@
 {# USER REVIEW FORM #}
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
-{{ form_start(form) }}
-{{ form_widget(form) }}
-<div class="text-center"><button class="btn btn-warning btn-round"><i class="fa fa-plus"></i> Review</button></div>
-{{ form_end(form) }}
-
+{% if not me %}
+    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <div class="text-center"><button class="btn btn-warning btn-round"><i class="fa fa-plus"></i> Review</button></div>
+    {{ form_end(form) }}
+{% endif %}
 <ul class="list-unstyled follows">
     {% for review in reviews %}
         <li>

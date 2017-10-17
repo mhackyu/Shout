@@ -47,7 +47,7 @@
                     {# ADVICE #}
                     <div class="media mt-3 mb-3">
                         <a class="media-left mr-2" href="#">
-                            <img class="img-circle" src="{{ asset('assets/img/faces/joe-gardner-2.jpg') }}" style="width: 84px; height: 84px;">
+                            <img class="img-circle" src="{{ asset('assets/img/') }}{{ advice.user.avatar }}" style="width: 84px; height: 84px;">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a> <div class="badge badge-default">#{{ rank }}</div> </h4>
@@ -59,7 +59,7 @@
                                     <span class="btn btn-outline-primary btn-round btn-sm mt-2 btn-helpful" data-id="{{ advice.id }}" data-is-helpful="false"><i class="fa fa-thumbs-o-up"></i>Helpful</span>
                                 {% endif %}
 
-                                <span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>
+                                {#<span class="btn btn-outline-danger btn-round btn-sm mt-2"><i class="fa fa-thumbs-o-down"></i>Not Helpful</span>#}
                             </div>
                         </div>
                     </div>

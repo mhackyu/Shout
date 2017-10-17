@@ -75,6 +75,7 @@ class AdviceController extends Controller
      */
     public function foundHelpfulAddAction(Request $request, Advice $advice)
     {
+
         if ($request->isXmlHttpRequest()) {
             $helpful = new FoundHelpful();
             $helpful->setAdvice($advice);

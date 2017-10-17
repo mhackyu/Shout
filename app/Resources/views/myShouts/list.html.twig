@@ -24,6 +24,7 @@
                             <div class="dropdown">
                                 <button class="btn btn-drp dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item drp-item" href="{{ path('shout_edit', {slug: slug}) }}"><i class="fa fa-times"></i> Edit</a>
                                     <a class="dropdown-item drp-item" href="{{ path('shout_delete', {slug: slug}) }}?next={{ path('my_shout_list') }}&token={{ csrf_token('delete') }}"><i class="fa fa-times"></i> Delete</a>
                                     {#<a class="dropdown-item drp-item" href="#">Another action</a>#}
                                     {#<a class="dropdown-item drp-item" href="#">Something else here</a>#}

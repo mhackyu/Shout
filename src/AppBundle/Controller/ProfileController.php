@@ -25,7 +25,7 @@ class ProfileController extends Controller
     public function userAction(Request $request, User $user)
     {
         if ($user->getId() == $this->getUser()->getId()) {
-            return $this->redirectToRoute('my_profile_show');
+            return $this->redirectToRoute('profile_me');
         }
 
         $userReview = new UserReview();
@@ -49,7 +49,25 @@ class ProfileController extends Controller
         return $this->render('profile/show.html.twig', [
             'user' => $user,
             'reviews' => $reviews,
+            'me' => false,
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/me", name="profile_me")
+     */
+    public function meAction()
+    {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $reviews = $em->getRepository('AppBundle:User')
+            ->find($user->getId())->getUserReview();
+
+        return $this->render('profile/show.html.twig', [
+            'user' => $user,
+            'reviews' => $reviews,
+            'me' => true
         ]);
     }
 

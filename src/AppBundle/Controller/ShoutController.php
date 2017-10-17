@@ -162,4 +162,31 @@ class ShoutController extends Controller
 
         return $this->redirect($request->get('next'));
     }
+
+    /**
+     * @Route("/{slug}/edit", name="shout_edit")
+     */
+    public function editAction(Shout $shout, Request $request)
+    {
+        // Redirect to shout list if he/she is not the owner of the shout.
+        if ($shout->getUser() != $this->getUser()) {
+            return $this->redirectToRoute('my_shout_list');
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(ShoutType::class, $shout);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $shout->setUpdatedAt(new \DateTime());
+            $em->flush();
+            $this->addFlash('success', "Successfully updated.");
+
+            return $this->redirectToRoute('my_shout_list');
+        }
+
+        return $this->render('shout/edit.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
 }
