@@ -7,7 +7,7 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8 offset-2 mt-5">
-            <h4 class="mb-3"><i>Result for</i> <b> "{{ app.request.get('search') }}"</b></h4>
+            <h4 class="mb-3"><i>Results for</i> <b> "{{ app.request.get('search') }}"</b></h4>
             <hr>
             {% for user in shoutees %}
                 <div class="card card-danger mb-3 animated fadeIn">

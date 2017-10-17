@@ -113,7 +113,7 @@ class ShoutController extends Controller
             $check = new Check($badWords);
             $hasProfanity = $check->hasProfanity($advice->getContent());
             if ($hasProfanity) {
-                $this->addFlash('danger', "Your advice contains bad words that can chuchu the shoutee so please .. chuchuchu");
+                $this->addFlash('danger', "Your advice contains bad words that can hurt and offend the shoutee. Please be mindful to the feelings of your fellow shoutee.");
                 $this->get('session')->set('adv', $advice->getContent());
                 return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
             }
@@ -136,7 +136,7 @@ class ShoutController extends Controller
                 5
             );
 
-        dump($advices);
+//        dump($advices);
 
         return $this->render('shout/show.html.twig', [
             'shout' => $shout,
