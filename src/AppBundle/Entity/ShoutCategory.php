@@ -10,11 +10,13 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ShoutCategoryRepository")
  * @ORM\Table(name="shout_category")
+ * @UniqueEntity(fields="name", message="Shout Category already exists")
  */
 class ShoutCategory
 {

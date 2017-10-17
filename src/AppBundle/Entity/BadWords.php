@@ -13,10 +13,12 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\BadWordsRepository")
  * @ORM\Table(name="bad_words")
+ * @UniqueEntity(fields="word", message="Already exists")
  */
 class BadWords
 {
