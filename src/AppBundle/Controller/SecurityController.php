@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Form\PasswordResetType;
+use AppBundle\Utils\TokenGenerator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -62,9 +65,76 @@ class SecurityController extends Controller
     /**
      * @Route("/forgot-password", name="forgot_password")
      */
-    public function forgotPasswordAction()
+    public function forgotPasswordAction(Request $request, \Swift_Mailer $mailer, TokenGenerator $tokenGenerator)
     {
-        
+        $email = $request->request->get('email');
+        $token = $request->request->get('token');
+
+        if ($request->isMethod("POST")) {
+            // This will check if the token is valid
+            if (!$this->isCsrfTokenValid('forgotPass', $token)) {
+                return $this->redirectToRoute("forgot_password");
+            }
+
+            // Check if the account is existing
+            $em = $this->getDoctrine()->getManager();
+            $user = $em->getRepository('AppBundle:User')
+                ->findOneBy(['email' => $email]);
+
+            if (!$user) {
+                $this->addFlash('danger', 'Account is not existing.');
+                return $this->redirectToRoute("forgot_password");
+            }
+
+            // Generate password reset token
+            $user->setPasswordResetToken($tokenGenerator->generatePasswordResetToken());
+            $em->flush();
+
+            // Send password link to email
+            $message = (new \Swift_Message("Reset Password"))
+                ->setFrom($this->getParameter('app.sender_email'), $this->getParameter('app.sender_name'))
+                ->setTo($email)
+                ->setBody(
+                    $this->render(
+                        'emails/forgot_pass.html.twig', ['name' => $user->getFirstName(), 'token' => $user->getPasswordResetToken()]),
+                    'text/html'
+                );
+
+            $mailer->send($message);
+            $this->addFlash('success', 'Password Reset link was sent to your email.');
+
+//            return $this->redirectToRoute('forgot_password');
+        }
+
         return $this->render('security/forgot_pass.html.twig');
     }
+
+    /**
+     * @Route("/reset-password/{passwordResetToken}", name="password_reset")
+     */
+    public function confirmPasswordReset(User $user, Request $request)
+    {
+
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm(PasswordResetType::class, $user);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $encodedPass = $this->get('security.password_encoder')
+                ->encodePassword($user, $user->getPlainPassword());
+            $user->setPassword($encodedPass);
+            $user->setPasswordResetToken("");
+            $em->flush();
+            $this->addFlash("success", "Password successfully reset.");
+
+            return $this->redirectToRoute('login');
+        }
+
+        return $this->render('security/reset_pass.html.twig', [
+            'form' => $form->createView()
+        ]);
+
+//        dump($user);die;
+    }
+
 }

@@ -15,4 +15,9 @@ class TokenGenerator
     {
         return "mhA" . md5(uniqid()) . "ckYU";
     }
+
+    public function generatePasswordResetToken()
+    {
+        return "Uy" . md5(uniqid()) . "Mh@cK";
+    }
 }

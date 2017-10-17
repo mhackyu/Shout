@@ -58,7 +58,7 @@ class RegistrationController extends Controller
     /**
      * @Route("/check-email", name="registration_check_email")
      */
-    public function checkEmailAction(Request $request, \Swift_Mailer $mailer, TokenGenerator $tokenGenerator)
+    public function checkEmailAction(Request $request, \Swift_Mailer $mailer)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $em->getRepository('AppBundle:User')
@@ -79,7 +79,7 @@ class RegistrationController extends Controller
         $email = $user->getEmail();
 
         $message = (new \Swift_Message('Welcome to Shout!'))
-            ->setFrom('contactshoutee@gmail.com','Team Shout')
+            ->setFrom($this->getParameter('app.sender_email'), $this->getParameter('app.sender_name'))
             ->setTo($email)
             ->setBody(
                 $this->renderView(

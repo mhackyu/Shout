@@ -1,0 +1,17 @@
+<h3>Hi {{ name }},</h3>
+<br>
+It looks like you requested a new password.
+
+If that sounds right, you can enter new password by clicking on the button below.
+
+<br>
+<a class="btn btn-primary btn-round" href="{{ url('password_reset', {passwordResetToken: token}) }}">Reset Password</a>.
+
+<br>
+If you do not wish to reset your password, just ignore this message.
+<br><br>
+Shout
+{{ url('homepage') }}
+
+{# Makes an absolute URL to the /images/logo.png file #}
+<img src="{{ absolute_url(asset('assets/img/apple-icon.png')) }}">

@@ -56,6 +56,11 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
     private $confirmationToken;
 
     /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $passwordResetToken;
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $enabled;
@@ -545,5 +550,21 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
+    }
+
+    /**
+     * @param mixed $passwordResetToken
+     */
+    public function setPasswordResetToken($passwordResetToken)
+    {
+        $this->passwordResetToken = $passwordResetToken;
     }
 }
