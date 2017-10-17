@@ -1,0 +1,68 @@
+{% extends "AdminBundle::base.html.twig" %}
+
+{% block title %}Bad Words Controller Management{% endblock %}
+{% block header %}Manage Bad Words{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+       <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                   <h4 class="title">Lists of Bad Words</h4>
+                    <div class="pull-right">
+                   <a href="{{path('admin_badwords_new')}}"><button class="btn btn-success">Add Bad Word <span class="ti-plus"></span></button></a></div></h4>
+                    </div>
+    
+            <div class="content table-responsive table-full-width">
+                  <table class="table table-hover">
+                  <thead> 
+                     <th>ID</th>
+                     <th>Word</th>
+                     <th></th>                                        
+                    </thead>            
+        
+                <tbody>
+                {% for badword in badword %}
+                <tr>
+                <td> {{badword.id}} </td>
+                <td> {{badword.word}} </td>
+                <td>
+                <button class="btn btn-info">
+                <a href="{{ path('admin_badwords_edit', {id:badword.id} ) }} "><span class="ti-pencil"></span></button></a>
+
+                
+                <button class="btn btn-danger"><a href="{{ path('admin_badwords_delete', {id:badword.id} ) }} "><span class="ti-trash" onClick="{return validate();}"></span></button></a>
+                </td>
+
+                {% endfor %}
+                </tr>
+                </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block js %}
+<script> 
+    $('#nav-badwords').addClass('active');
+</script>
+
+<script language='JavaScript'>
+    function validate()
+    {
+      conf = confirm("Are you sure you want to delete bad word?");
+      if (conf)
+        return true;
+      else
+          return false;
+    }
+  </script>
+{% endblock %}

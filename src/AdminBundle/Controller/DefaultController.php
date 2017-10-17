@@ -20,9 +20,12 @@ class DefaultController extends Controller
          ->findAll();
         $quotes = $em->getRepository('AppBundle:Quote')
          ->findAll();
+         $badwords = $em->getRepository('AppBundle:BadWords')
+         ->findAll();
         
         return $this->render('AdminBundle:Default:index.html.twig', [
-            'users' => count($users), 'shouts' => count($shouts), 'quotes' => count($quotes)]);
+            'users' => count($users), 'shouts' => count($shouts), 'quotes' => count($quotes),
+            'badwords' => count($badwords)]);
         
     }
 

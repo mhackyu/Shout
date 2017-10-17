@@ -63,8 +63,10 @@ class ProfileController extends Controller
         $user = $this->getUser();
         $form = $this->createForm(ProfileFormType::class, $user);
         if ($request->isMethod("POST")) {
+//            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
             $form->handleRequest($request);
-            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
+//            dump($user);
+
             dump($user);
             if ($form->isSubmitted() && $form->isValid()) {
 //                $encodedPass = $this->get('security.password_encoder')
@@ -86,7 +88,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/change-password", name="change_password")
+     * @Route("/change-password", name="user_change_password")
      */
     public function changePassAction(Request $request)
     {
@@ -104,7 +106,7 @@ class ProfileController extends Controller
                 $em->flush();
                 $this->addFlash("success", "Password successfully changed.");
 
-                return $this->redirectToRoute('change_password');
+                return $this->redirectToRoute('shout_list');
             }
             else {
                 $this->addFlash("danger", "Failed to update to update password.");

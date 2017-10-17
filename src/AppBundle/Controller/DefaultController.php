@@ -19,7 +19,13 @@ class DefaultController extends Controller
 
         // get qoute of the day
         $em = $this->getDoctrine()->getManager();
-        $quote = $em->getRepository('AppBundle:Quote')->quoteOfTheDay();
+//        $quote = $em->getRepository('AppBundle:Quote')->quoteOfTheDay();
+        $quotes = $em->getRepository('AppBundle:Quote')->findAll();
+        $quote = "";
+        if (!empty($quotes)) {
+            $randIndex = array_rand($quotes);
+            $quote = $quotes[$randIndex];
+        }
 
         if ($authChecker->isGranted("IS_AUTHENTICATED_FULLY")) {
             return $this->redirectToRoute('shout_list');

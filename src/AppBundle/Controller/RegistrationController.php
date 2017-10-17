@@ -41,6 +41,7 @@ class RegistrationController extends Controller
             $user->setPassword($password);
             $user->setRole("ROLE_USER");
             $user->setConfirmationToken($tokenGenerator->generateConfirmationToken());
+            $user->setAvatar(strtolower($user->getGender()) . ".png");
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);

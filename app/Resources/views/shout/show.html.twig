@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block title %}
+    {{ shout.title }}
+{% endblock %}
+
+
 {% block content %}
     {% set slug = shout.slug %}
     {% set user = shout.user.username %}
@@ -40,16 +45,19 @@
                         <hr>
                         <div class="media">
                             <a class="media-left mr-2" href="#">
-                                <img class="img-rounded" src="{{ asset('assets/img/faces/clem-onojeghuo-2.jpg') }}" style="width: 64px; height: 64px;">
+                                <img class="img-rounded" src="{{ asset('assets/img/') }}{{ app.user.avatar }}" style="width: 64px; height: 64px;">
                             </a>
                             <div class="media-body">
                                 {#<h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>#}
                                 {#<div class="">#}
                                 {% form_theme form 'bootstrap_3_layout.html.twig' %}
-                                {{ form_start(form) }}
-                                {{ form_widget(form) }}
+                                {#{{ form_start(form) }}#}
+                                {{ form_label(form.content) }}
+                                {{ form_widget(form.content)}}
+                                {{ form_errors(form.content) }}
+                                {#{{ form_widget(form) }}#}
                                 <div class="pull-right">
-                                    <button type="submit" class="btn btn-default">post</button>
+                                    <button type="submit" class="btn btn-default mt-3">post</button>
                                 </div>
                                 {{ form_end(form) }}
 

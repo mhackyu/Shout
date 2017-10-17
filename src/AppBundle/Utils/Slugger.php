@@ -16,8 +16,8 @@ class Slugger {
     /**
      * @return string
      */
-    public function slugify()
+    public function slugify($string)
     {
-        return uniqid();
+        return preg_replace('/\s+/', '-', mb_strtolower(trim(strip_tags($string)), 'UTF-8')) . "-" . uniqid();
     }
 }

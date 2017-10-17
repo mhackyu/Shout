@@ -9,9 +9,10 @@
         <a class="navbar-brand" href="{{ path('shout_list') }}">Shout!</a>
         <div class="collapse navbar-collapse" id="navbar-danger">
             <div class="col-md-7">
-                <form class="mt-3" method="get" role="form">
+                <form class="mt-3" action="{{ path('shoutee_search') }}" method="get" role="form">
                     <div class="input-group">
-                        <input typ7="text" class="form-control bg-danger" name="search" placeholder="Search Shoutee" style="border-color: white; color: white">
+                        <input type="text" class="form-control bg-danger" name="search" placeholder="Search Shoutee" style="border-color: white; color: white"
+                        value="{% if app.request.get('search') %}{{ app.request.get('search') }}{% endif %}">
                         <button type="submit" class="input-group-addon bg-danger text-white" style="border-color: white">
                             <i class="fa fa-search"></i>
                         </button>
@@ -28,31 +29,31 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('my_shout_list') }}"><i class="fa fa-bullhorn"></i> My Shouts</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-notification" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bell"></i><span class="notification">99</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
+                {#<li class="nav-item dropdown">#}
+                    {#<a class="nav-link dropdown-notification" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">#}
+                        {#<i class="fa fa-bell"></i><span class="notification">99</span>#}
+                    {#</a>#}
+                    {#<ul class="dropdown-menu dropdown-menu-right dropdown-danger">#}
                         {#<div class="text-center p-3"><i class="fa fa-spinner fa-spin"></i></div>#}
-                        <li class="dropdown-header">Notifications</li>
-                        <li class="dropdown-item"><a href="#pk"><span class="text-info">Mark</span> shouts your problem "Ang sakit talaga kapag..".</a></li>
-                        <li class="dropdown-item"><a href="#pk"><span class="text-info">Chistian</span> adviced on your shout "Ang sakit talaga kapag..".</a></li>
+                        {#<li class="dropdown-header">Notifications</li>#}
+                        {#<li class="dropdown-item"><a href="#pk"><span class="text-info">Mark</span> shouts your problem "Ang sakit talaga kapag..".</a></li>#}
+                        {#<li class="dropdown-item"><a href="#pk"><span class="text-info">Chistian</span> adviced on your shout "Ang sakit talaga kapag..".</a></li>#}
                         {#<li class="dropdown-item"><a href="#pk"><span class="text-info">Jen</span> followed you.</a></li>#}
-                        <li class="dropdown-item"><a href="#pk"><span class="text-info">mhackyu</span> loved your shout "Ang sakit talaga kapag..".</a></li>
-                        <div class="dropdown-divider"></div>
-                        <li class="dropdown-item">
-                            <a class="text-center ml-4" href="#pk">Show All Notifications<i class="fa fa-angle-right"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                        {#<li class="dropdown-item"><a href="#pk"><span class="text-info">mhackyu</span> loved your shout "Ang sakit talaga kapag..".</a></li>#}
+                        {#<div class="dropdown-divider"></div>#}
+                        {#<li class="dropdown-item">#}
+                            {#<a class="text-center ml-4" href="#pk">Show All Notifications<i class="fa fa-angle-right"></i>#}
+                            {#</a>#}
+                        {#</li>#}
+                    {#</ul>#}
+                {#</li>#}
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
                         <li class="dropdown-header">Account</li>
                         <li class="dropdown-item"><a href="{{ path('my_profile_show') }}"><i class="fa fa-user"></i> Profile</a></li>
                         {#<li class="dropdown-item"><a href="#pk"><i class="fa fa-cog"></i> Settings</a></li>#}
-                        <li class="dropdown-item"><a href="{{ path('change_password') }}"><i class="fa fa-asterisk"></i> Password</a></li>
+                        <li class="dropdown-item"><a href="{{ path('user_change_password') }}"><i class="fa fa-asterisk"></i> Password</a></li>
                         {#<li class="dropdown-item"><a href="#pk">Change Password</a></li>#}
                         {#<div class="dropdown-divider"></div>#}
                         {#<li class="dropdown-item"><a href="#pk"></a></li>#}

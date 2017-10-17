@@ -117,4 +117,17 @@ class AdviceController extends Controller
         return new Response("failed");
     }
 
+    /**
+     * @Route("/advice/{id}/remove", name="advice_remove")
+     */
+    public function removeAction(Advice $advice)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $shout = $advice->getShout();
+        $em->remove($advice);
+        $em->flush();
+
+        return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
+    }
+
 }

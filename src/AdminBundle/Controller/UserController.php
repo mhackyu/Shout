@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -14,15 +15,16 @@ class UserController extends Controller
 	/**
 	 * @Route("admin/user", name="admin_user")
      */
-    public function userAction()
+    public function userAction(Request $request)
     {
 //        dump("Asd");die;
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository('AppBundle:User')
-            ->findAll();
+        $users = $em->getRepository('AppBundle:User')->findUserByUsername($request->get('search'));
+            
 
         return $this->render('AdminBundle:User:list.html.twig', [
-        	'users' => $users
+        	'users' => $users,
+            'search' => $request->get('search')
         	]);
     }
 
@@ -83,7 +85,22 @@ class UserController extends Controller
             $em->flush();
             return $this->redirectToRoute('admin_user');
         
-    }    
+    } 
+
+    /**
+     * @Route("admin/user/{id}/enabled", name="admin_user_enabled")
+     */
+
+    public function enableAction(User $user, Request $request)
+    {
+       if($request->isXmlHttpRequest()){
+         $em = $this-> getDoctrine()->getManager();
+         $user->setEnabled($request->request->get('isEnabled'));
+         $em->flush();
+
+       }
+        return new Response("toggle");
+    }
 
 
 

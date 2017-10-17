@@ -16,6 +16,8 @@
                     <span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ shout['cnt']|number_format }}</span>
                     {#<div style="margin-top: -5px"><span class="badge badge-default mb-1"> <i class="fa fa-bullhorn"></i>{{ shout['cnt']|number_format }}</span></div>#}
                 </a>
+            {% else %}
+                <p>No top shouts available.</p>
             {% endfor %}
         </div>
     </div>
