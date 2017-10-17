@@ -1,5 +1,10 @@
 {% extends 'layouts/signin_signup_base.html.twig' %}
 
+{% block title %}
+    Sign in
+{% endblock %}
+
+
 {% block content %}
     <nav class="navbar navbar-toggleable-md fixed-top navbar-transparent">
         <div class="container">
@@ -54,7 +59,7 @@
                                 <a href="{{ path('registration') }}" class="btn btn-default btn-block btn-round mt-2">Sign up</a>
                             </form>
                             <div class="forgot">
-                                <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+                                <a href="{{ path('forgot_password') }}" class="btn btn-link btn-danger">Forgot password?</a>
                             </div>
                         </div>
                     </div>

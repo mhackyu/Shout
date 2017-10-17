@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -56,5 +57,14 @@ class SecurityController extends Controller
     public function logoutAction()
     {
 
+    }
+
+    /**
+     * @Route("/forgot-password", name="forgot_password")
+     */
+    public function forgotPasswordAction()
+    {
+        
+        return $this->render('security/forgot_pass.html.twig');
     }
 }

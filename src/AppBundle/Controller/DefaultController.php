@@ -54,10 +54,7 @@ class DefaultController extends Controller
              'text/plain'
          )
          */
-
         $mailer->send($message);
-
-
         dump($mailer);die;
     }
 }
