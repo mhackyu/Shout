@@ -6,8 +6,12 @@
         </a>
         <div class="media-body">
             <h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: advice.user.username}) }}">{{ advice.user.username }}</a>
-                {% if advice.user == app.user %}
+                {% if isOwner %}
                     <a href="{{ path('advice_remove', {id: advice.id}) }}" class="btn btn-outline-danger btn-round text-danger btn-sm ml-0 pull-right"><i class="fa fa-times"></i> remove</a>
+                {% else %}
+                    {% if advice.user == app.user %}
+                    <a href="{{ path('advice_remove', {id: advice.id}) }}" class="btn btn-outline-danger btn-round text-danger btn-sm ml-0 pull-right"><i class="fa fa-times"></i> remove</a>
+                    {% endif %}
                 {% endif %}
             </h4>
             {{ advice.content }}
@@ -27,3 +31,10 @@
 {% if shout.advice|length > 5 %}
     <div class="text-center mt-3 mb-3"><a href="">View more advice</a></div>
 {% endif %}
+
+<hr>
+<div class="container-fluid">
+    <div class="pull-right">
+        {{ knp_pagination_render(advices) }}
+    </div>
+</div>

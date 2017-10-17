@@ -118,10 +118,14 @@ class ShoutController extends Controller
                 $this->get('session')->set('adv', $advice->getContent());
                 return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
             }
+
+            // Post advice if no bad words encountered.
             $advice->setShout($shout);
             $advice->setUser($this->getUser());
             $em->persist($advice);
             $em->flush();
+
+            // Remove 'adv' session if advice is posted.
             if ($this->get('session')->has('adv')) {
                 $this->get('session')->remove('adv');
             }
@@ -130,19 +134,32 @@ class ShoutController extends Controller
             return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
         }
 
-        $advices = $em->getRepository('AppBundle:Advice')
-            ->findBy(
-                ['shout' => $shout],
-                ['createdAt' => "DESC"],
-                5
-            );
+        // This will check if the current user is the owner of the shout.
+        $isOwner = false;
+        if ($shout->getUser() == $this->getUser()) {
+            $isOwner = true;
+        }
 
+//        $advices = $em->getRepository('AppBundle:Advice')
+//            ->findBy(
+//                ['shout' => $shout],
+//                ['createdAt' => "DESC"]
+//            );
 //        dump($advices);
+        // Get all advices from shout.
+        $advices = $em->getRepository('AppBundle:Advice')->findAllDQL($shout->getId());
+        $paginator = $this->get('knp_paginator');
+        $results = $paginator->paginate(
+            $advices,
+            $request->query->getInt('page', 1),
+            $request->query->getInt('limit', 10)
+        );
 
         return $this->render('shout/show.html.twig', [
             'shout' => $shout,
-            'advices' => $advices,
+            'advices' => $results,
             'form' => $form->createView(),
+            'isOwner' => $isOwner
         ]);
     }
 

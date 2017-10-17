@@ -36,4 +36,16 @@ class AdviceRepository extends EntityRepository
             ->setParameter('end', $end)
             ->getResult();
     }
+
+    public function findAllDQL($shout)
+    {
+        return $this->getEntityManager()
+            ->createQuery('
+                SELECT a
+                FROM AppBundle:Advice a
+                WHERE a.shout = :shout
+                ORDER BY a.createdAt DESC
+            ')
+            ->setParameter("shout", $shout);
+    }
 }
