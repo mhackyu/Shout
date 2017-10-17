@@ -103,7 +103,7 @@ class SecurityController extends Controller
             $mailer->send($message);
             $this->addFlash('success', 'Password Reset link was sent to your email.');
 
-//            return $this->redirectToRoute('forgot_password');
+            return $this->render('security/forgot_pass_sent.html.twig');
         }
 
         return $this->render('security/forgot_pass.html.twig');
@@ -133,8 +133,6 @@ class SecurityController extends Controller
         return $this->render('security/reset_pass.html.twig', [
             'form' => $form->createView()
         ]);
-
-//        dump($user);die;
     }
 
 }

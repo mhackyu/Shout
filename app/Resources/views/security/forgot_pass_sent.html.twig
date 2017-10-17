@@ -31,18 +31,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8 offset-md-2" style="margin-top: 50px;">
-                        <h2 class="title">Forgot Password</h2>
-                        <h5 class="description">Lost your password? Please enter your email address. You will receive a link to create a new password via email.</h5>
-                        <br>
-                        <form method="post" role="form">
-                            {#<legend>Email</legend>#}
-                            <div class="form-group">
-                                <label for="email">Enter your email</label>
-                                <input type="text" name="token" value="{{ csrf_token('forgotPass') }}" hidden>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="example@domain.com">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Reset Password</button>
-                        </form>
+                        <h2 class="title">Check your email for password reset link.</h2>
                     </div>
                 </div>
                 <br/><br/>
@@ -55,8 +44,6 @@
                 <nav class="footer-nav">
                     <ul>
                         <li><a href="#">Shout Team</a></li>
-                        {#<li><a href="http://blog.creative-tim.com">Blog</a></li>#}
-                        {#<li><a href="https://www.creative-tim.com/license">Licenses</a></li>#}
                     </ul>
                 </nav>
                 <div class="credits ml-auto">
