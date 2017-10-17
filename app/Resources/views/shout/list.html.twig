@@ -6,10 +6,9 @@
             {# SHOUTS FEED #}
             <h2 class="mt-5 text-center"><strong>Shouts Feed</strong></h2>
             <hr>
+            {# FILTER PROBLEMS #}
             <div class="row">
-                <div class="text-center">
-                    Filter problems by
-                </div>
+                {% include 'shout/filter_problems_by_category.html.twig' %}
             </div>
             <div class="row">
                 {% include 'shout/shout_feed_content.html.twig' %}

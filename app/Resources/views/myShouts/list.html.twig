@@ -26,8 +26,6 @@
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                     <a class="dropdown-item drp-item" href="{{ path('shout_edit', {slug: slug}) }}"><i class="fa fa-times"></i> Edit</a>
                                     <a class="dropdown-item drp-item" href="{{ path('shout_delete', {slug: slug}) }}?next={{ path('my_shout_list') }}&token={{ csrf_token('delete') }}"><i class="fa fa-times"></i> Delete</a>
-                                    {#<a class="dropdown-item drp-item" href="#">Another action</a>#}
-                                    {#<a class="dropdown-item drp-item" href="#">Something else here</a>#}
                                 </div>
                             </div>
 
@@ -49,8 +47,8 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="card-block" style="height: 100px;">
-                        {{ shout.body }}
+                    <div class="card-block">
+                        {{ shout.body|md2html }}
                         {#{% if bodyLength > 220 %}#}
                             {#{{ shout.body|slice(0,220) }}...<a href="{{ path('shout_show', {slug: slug}) }}"><b>view more</b></a>#}
                         {#{% else %}#}

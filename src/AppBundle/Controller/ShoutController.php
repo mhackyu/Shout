@@ -30,13 +30,21 @@ class ShoutController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $shouts = $em->getRepository('AppBundle:Shout')->shoutsDQL();
+        if ($request->get('type')) {
+            $shouts = $em->getRepository('AppBundle:Shout')->shoutsByCategoryDQL($request->get('type'));
+        }
+        else {
+            $shouts = $em->getRepository('AppBundle:Shout')->shoutsDQL();
+        }
+
+        $categories = $em->getRepository('AppBundle:ShoutCategory')->findAllASC();
         $paginator = $this->get('knp_paginator');
         $results = $paginator->paginate(
             $shouts,
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 6)
         );
+        dump($results);
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
 
@@ -53,6 +61,7 @@ class ShoutController extends Controller
         }
         return $this->render('shout/list.html.twig', [
             'shouts' => $results,
+            'categories' => $categories,
             'form' => $form->createView()
         ]);
     }

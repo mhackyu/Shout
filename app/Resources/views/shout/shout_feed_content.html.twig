@@ -9,9 +9,6 @@
                 {% set bodyLength = shout.body|length  %}
                 <h4 class="card-title">"{{ shout.title }}"</h4>
                 <p style="margin-top: -10px">
-                    {#by#}
-                    {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
-                    {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
                     <i class="small">{{ shout.createdAt|date() }}</i>
                 </p>
 
