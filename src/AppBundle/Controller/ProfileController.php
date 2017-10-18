@@ -112,6 +112,8 @@ class ProfileController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        $avatarFilename = $user->getAvatar();
+        $user->setAvatar($this->getParameter('app.avatar_dir') . "/" . $avatarFilename);
         $form = $this->createForm(ChangePasswordFormType::class, $user);
 
         if ($request->isMethod("POST")) {
@@ -121,6 +123,7 @@ class ProfileController extends Controller
                 $encodedPass = $this->get('security.password_encoder')
                     ->encodePassword($user, $user->getPlainPassword());
                 $user->setPassword($encodedPass);
+                $user->setAvatar($avatarFilename);
                 $em->flush();
                 $this->addFlash("success", "Password successfully changed.");
 
