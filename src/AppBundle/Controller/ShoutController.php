@@ -44,7 +44,6 @@ class ShoutController extends Controller
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 6)
         );
-//        dump($results);
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
 
@@ -106,9 +105,9 @@ class ShoutController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //TODO: create a service for profanity filter.
-            //Profanity filter for advice.
-            //This will get all badwords from database.
+            // TODO: create a service for profanity filter.
+            // Profanity filter for advice.
+            // This will get all badwords from database.
             $badWords = $em->getRepository('AppBundle:BadWords')
                 ->getAllBadWords();
             $check = new Check($badWords);
@@ -140,12 +139,6 @@ class ShoutController extends Controller
             $isOwner = true;
         }
 
-//        $advices = $em->getRepository('AppBundle:Advice')
-//            ->findBy(
-//                ['shout' => $shout],
-//                ['createdAt' => "DESC"]
-//            );
-//        dump($advices);
         // Get all advices from shout.
         $advices = $em->getRepository('AppBundle:Advice')->findAllDQL($shout->getId());
         $paginator = $this->get('knp_paginator');

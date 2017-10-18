@@ -30,7 +30,7 @@ class ShoutType extends AbstractType
                 ]
             ])
             ->add('shoutCategory', EntityType::class, [
-                'label' => 'Type of Problem',
+                'label' => 'Shout Type',
                 'class' => 'AppBundle\Entity\ShoutCategory',
                 'choice_label' => 'name',
                 'placeholder' => '-Select One-'

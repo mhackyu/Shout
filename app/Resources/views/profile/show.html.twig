@@ -9,10 +9,10 @@
             <div class="container">
                 <div class="owner">
                     <div class="avatar">
-                        <img src="/{{ user.avatar }}" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                        <img src="/{{ user.avatar }}" alt="User avatar not available" class="img-circle img-no-padding img-responsive">
                     </div>
                     <div class="name">
-                        <h4 class="title">{{ user.username }}<br/></h4>
+                        <h4 class="title mb-0">{{ user.username }} <br> <h6><span class="label label-danger">{{ "now"|date('Y') - user.dob|date('Y') }} years old</span></h6></h4>
                         <h6 class="description">About</h6>
                     </div>
                 </div>

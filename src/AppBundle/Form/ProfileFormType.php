@@ -44,15 +44,15 @@ class ProfileFormType extends AbstractType
                     'placeholder' => 'Dela Cruz'
                 ]
             ])
-//            ->add('dob', BirthdayType::class, [
-//                'label' => 'Birthday',
-//                'label_attr' => [
-//                    'class' => 'mt-0',
-//                ],
-//                'attr' => [
-//                    'placeholder' => 'Dela Cruz',
-//                ]
-//            ])
+            ->add('dob', BirthdayType::class, [
+                'label' => 'Birthday',
+                'label_attr' => [
+                    'class' => 'mt-0',
+                ],
+                'attr' => [
+                    'placeholder' => 'Dela Cruz',
+                ]
+            ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
                     'Male' => 'male', 'Female' => 'female'

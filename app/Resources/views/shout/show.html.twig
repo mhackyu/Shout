@@ -10,22 +10,19 @@
     {% set user = shout.user.username %}
     <div class="row">
         {#<div class="col-md-3"></div>#}
-        <div class="col-md-12 bg-faded">
+        <div class="col-md-8 offset-md-2 bg-faded">
             <div class="panel panel-default">
                 <form class="p-3" action="" method="post" role="form">
                     <div class="panel-heading">
                         <h4 class="text-center">"{{ shout.title }}"</h4>
                         <p class="text-center mt-0" style="margin-top: -10px">
-                            {#by#}
-                            {#<img class="img-circle img-no-padding img-responsive" height="32px" width="32px" src="{{ asset('assets/img/faces/kaci-baum-2.jpg') }}" alt="">#}
-                            {#<a href="{{ path('profile_show', {username: user}) }}">{{ user }}</a>#}
-                            <i class="small">{{ shout.createdAt|date() }}</i>
+                            <span class="label label-danger">{{ "now"|date('Y') - shout.user.dob|date('Y') }} years old</span>
+                            <span class="span label label-warning"><i>{{ shout.createdAt|date() }}</i></span>
                         </p>
                         <hr>
                     </div>
-                    <div class="panel-body cle                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          arfix">
+                    <div class="panel-body clear-fix">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          arfix">
                         <p>{{ shout.body|md2html }}</p>
-                        {#<p>{{ shout.body }}</p>#}
                     </div>
                     <hr>
                     <div class="panel-footer">
@@ -46,7 +43,7 @@
                         <hr>
                         <div class="media">
                             <a class="media-left mr-2" href="#">
-                                <img class="img-rounded" src="{{ asset('assets/img/') }}{{ app.user.avatar }}" style="width: 64px; height: 64px;">
+                                <img class="img-rounded" src="/{{ app.user.avatar }}" style="width: 64px; height: 64px;">
                             </a>
                             <div class="media-body">
                                 {#<h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>#}
