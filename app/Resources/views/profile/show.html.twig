@@ -1,5 +1,10 @@
 {% extends "base.html.twig" %}
 
+{% block title %}
+    {{ user.username }}
+{% endblock %}
+
+
 {% block content %}
     <div class="wrapper">
         {#<div class="page-header page-header-xs" data-parallax="true" style="background-image: url('{{ asset('assets/img/fabio-mangione.jpg') }}');">#}
@@ -9,7 +14,7 @@
             <div class="container">
                 <div class="owner">
                     <div class="avatar">
-                        <img src="/{{ user.avatar }}" alt="User avatar not available" class="img-circle img-no-padding img-responsive">
+                        <img src="{{ asset('assets/img/' ~ user.avatar) }}" alt="User avatar not available" class="img-circle img-no-padding img-responsive">
                     </div>
                     <div class="name">
                         <h4 class="title mb-0">{{ user.username }} <br> <h6><span class="label label-danger">{{ "now"|date('Y') - user.dob|date('Y') }} years old</span></h6></h4>

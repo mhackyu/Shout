@@ -7,8 +7,9 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
-    app.sender_email: contactshoutee@gmail.com
-    app.sender_name: Team Shout
+    app.sender_email: 'contactshoutee@gmail.com'
+    app.sender_name: 'Team Shout'
+    app.avatar_dir: '%kernel.project_dir%/web/assets/img'
 
 framework:
     #esi: ~

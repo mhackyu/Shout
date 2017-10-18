@@ -43,7 +43,7 @@
                         <hr>
                         <div class="media">
                             <a class="media-left mr-2" href="#">
-                                <img class="img-rounded" src="/{{ app.user.avatar }}" style="width: 64px; height: 64px;">
+                                <img class="img-rounded" src="{{ asset('assets/img/' ~ app.user.avatar) }}" style="width: 64px; height: 64px;">
                             </a>
                             <div class="media-body">
                                 {#<h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>#}

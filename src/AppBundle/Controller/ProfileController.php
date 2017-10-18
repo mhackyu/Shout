@@ -4,6 +4,7 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\UserReview;
+use AppBundle\Form\AvatarType;
 use AppBundle\Form\ChangePasswordFormType;
 use AppBundle\Form\ProfileFormType;
 use AppBundle\Form\UserReviewType;
@@ -77,13 +78,17 @@ class ProfileController extends Controller
     public function profileAction(Request $request)
     {
         $user = $this->getUser();
+        $avatarFilename = $user->getAvatar();
         // In-add ko lang to kasi vinavalidate nya na dapat ndi empty si plainpassword.
         $user->setPlainPassword("dummy-data");
+        $user->setAvatar($this->getParameter('app.avatar_dir') . "/" . $avatarFilename);
+
         $form = $this->createForm(ProfileFormType::class, $user);
         if ($request->isMethod("POST")) {
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
+                $user->setAvatar($avatarFilename);
                 $em = $this->getDoctrine()->getManager();
                 $em->flush();
                 $this->addFlash("success", "Your profile was successfully updated.");
@@ -128,6 +133,48 @@ class ProfileController extends Controller
 
         return $this->render('security/change_pass.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/change-avatar", name="my_profile_avatar")
+     */
+    public function changeAvatarAction(Request $request)
+    {
+        $user = $this->getUser();
+        // In-add ko lang to kasi vinavalidate nya na dapat ndi empty si plainpassword.
+        $user->setPlainPassword("dummy-data");
+        $avatar = $user->getAvatar();
+        $user->setAvatar("");
+
+        $form = $this->createForm(AvatarType::class, $user);
+        if ($request->isMethod("POST")) {
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $file = $user->getAvatar();
+                $fileName = md5(uniqid()).'.'.$file->guessExtension();
+                $file->move(
+                    $this->getParameter('app.avatar_dir'),
+                    $fileName
+                );
+                $user->setAvatar($fileName);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
+                $this->addFlash("success", "Your profile was successfully updated.");
+
+                return $this->redirectToRoute('profile_me');
+            }
+            else {
+                $this->addFlash("danger", "Failed to update your profile.");
+            }
+        }
+
+        return $this->render('profile/avatar.html.twig', [
+            'form' => $form->createView(),
+            'user' => $this->getUser(),
+            'avatar' => $avatar
         ]);
     }
 }

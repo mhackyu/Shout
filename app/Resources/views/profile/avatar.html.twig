@@ -1,17 +1,17 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-    Update Profile
+    Change Avatar
 {% endblock %}
 
 {% block content %}
     <div class="row bg-faded">
         <div class="col-md-6 offset-3 mt-5 mb-5">
-            {#<div class="avatar text-center">#}
-                {#<img src="/{{ app.user.avatar }}" alt="User avatar not available" class="img-circle img-no-padding img-responsive" style="height: 100px">#}
-            {#</div>#}
-            <legend class="text-center">My Profile</legend>
+            <legend class="text-center">Change Avatar</legend>
             <hr>
+            <div class="avatar text-center">
+                <img src="{{ asset('assets/img/' ~ avatar) }}" alt="User avatar not available" class="img-circle img-no-padding img-responsive" style="height: 128px;">
+            </div>
             {% form_theme form 'bootstrap_3_layout.html.twig' %}
             {{ form_start(form) }}
             {{ form_widget(form) }}
@@ -20,3 +20,5 @@
         </div>
     </div>
 {% endblock %}
+
+
