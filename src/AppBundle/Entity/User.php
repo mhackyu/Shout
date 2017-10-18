@@ -145,6 +145,11 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
      */
     private $userReview;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Notification", mappedBy="user")
+     */
+    private $notifications;
+
     public function __construct()
     {
 //        $this->isActive = true;
@@ -154,6 +159,7 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
         $this->loud = new ArrayCollection();
         $this->foundHelpful = new ArrayCollection();
         $this->userReview = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
 // may not be needed, see section on salt below
 // $this->salt = md5(uniqid(null, true));
     }
@@ -539,4 +545,21 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
     {
         $this->passwordResetToken = $passwordResetToken;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * @param mixed $notifications
+     */
+    public function setNotifications($notifications)
+    {
+        $this->notifications = $notifications;
+    }
+
 }

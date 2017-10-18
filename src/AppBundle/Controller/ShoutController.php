@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Advice;
+use AppBundle\Entity\Notification;
 use AppBundle\Entity\Shout;
 use AppBundle\Form\AdviceFormType;
 use AppBundle\Form\ShoutType;
@@ -95,11 +96,19 @@ class ShoutController extends Controller
      */
     public function showAction(Request $request, Shout $shout)
     {
+
         $em = $this->getDoctrine()->getManager();
         $advice = new Advice();
         if ($this->get('session')->has('adv')) {
             $advice->setContent($this->get('session')->get('adv'));
         }
+
+        // This will check if the current user is the owner of the shout.
+        $isOwner = false;
+        if ($shout->getUser() == $this->getUser()) {
+            $isOwner = true;
+        }
+
         $form = $this->createForm(AdviceFormType::class, $advice);
         $form->handleRequest($request);
 
@@ -122,21 +131,26 @@ class ShoutController extends Controller
             $advice->setShout($shout);
             $advice->setUser($this->getUser());
             $em->persist($advice);
+
+            // Add notification
+            if (!$isOwner) {
+                $notification = new Notification();
+                $notification->setUser($shout->getUser());
+                $notification->setFrom($this->getUser());
+                $notification->setMessage("You received an advice from your shout \"".$shout->getTitle()."\"");
+                $notification->setLink($this->generateUrl('shout_show', ['slug' => $shout->getSlug()]));
+                $em->persist($notification);
+            }
+
             $em->flush();
 
             // Remove 'adv' session if advice is posted.
             if ($this->get('session')->has('adv')) {
                 $this->get('session')->remove('adv');
             }
-            $this->addFlash('success', "Advice successfully posted.");
+            $this->addFlash('success', "Successfully posted.");
 
             return $this->redirectToRoute('shout_show', ['slug' => $shout->getSlug()]);
-        }
-
-        // This will check if the current user is the owner of the shout.
-        $isOwner = false;
-        if ($shout->getUser() == $this->getUser()) {
-            $isOwner = true;
         }
 
         // Get all advices from shout.

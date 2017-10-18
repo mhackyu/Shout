@@ -44,7 +44,7 @@ class AdviceRepository extends EntityRepository
                 SELECT a
                 FROM AppBundle:Advice a
                 WHERE a.shout = :shout
-                ORDER BY a.createdAt DESC
+                ORDER BY a.createdAt ASC
             ')
             ->setParameter("shout", $shout);
     }

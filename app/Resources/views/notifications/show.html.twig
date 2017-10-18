@@ -1,0 +1,34 @@
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-notification" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-bell"></i><span class="notification">{{ notication_count }}</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
+        <li class="dropdown-header">Notifications
+            {#<div class="pull-right">#}
+            {#<a href="{{ path('notification_seen_all') }}"><i class="fa fa-check-circle-o"></i>Mark all as seen</a>#}
+            {#</div>#}
+        </li>
+        {% for notification in notifications %}
+            <li class="dropdown-item">
+                <a href="{{ path('notification_seen', {id: notification.id}) }}">
+                    <small> {{ notification.createdAt|date('m-d-Y H:i') }} - {{ notification.message}}
+                        from <span class="text-info">{{ notification.from.username }}</span></small>
+                    {% if notification.seen %}<span class="label label-warning"> seen </span>{% endif %}
+                </a>
+            </li>
+            {#<li class="dropdown-item"><a href="#pk"><span class="text-info">Chistian</span> adviced on your shout "Ang sakit talaga kapag..".</a></li>#}
+            {#<li class="dropdown-item"><a href="#pk"><span class="text-info">Jen</span> followed you.</a></li>#}
+            {#<li class="dropdown-item"><a href="#pk"><span class="text-info">mhackyu</span> loved your shout "Ang sakit talaga kapag..".</a></li>#}
+        {% else  %}
+            {#<li class="dropdown-item">#}
+            {#<a href=""><p>No Notifications</p></a>#}
+            {#</li>#}
+            <p class="text-muted text-center"><b>No Notifications</b></p>
+        {% endfor %}
+        <div class="dropdown-divider"></div>
+        <li class="dropdown-item">
+            <a class="text-center ml-4" href="#pk">Show All Notifications<i class="fa fa-angle-right"></i>
+            </a>
+        </li>
+    </ul>
+</li>

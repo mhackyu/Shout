@@ -21,7 +21,7 @@
                         </p>
                         <hr>
                     </div>
-                    <div class="panel-body clear-fix">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          arfix">
+                    <div class="panel-body clear-fix">
                         <p>{{ shout.body|md2html }}</p>
                     </div>
                     <hr>
@@ -41,31 +41,46 @@
                             {% endif %}
                         </div>
                         <hr>
-                        <div class="media">
-                            <a class="media-left mr-2" href="#">
-                                <img class="img-rounded" src="{{ asset('assets/img/' ~ app.user.avatar) }}" style="width: 64px; height: 64px;">
-                            </a>
-                            <div class="media-body">
-                                {#<h4 class="media-heading"><a class="" href="{{ path('profile_show', {username: app.user.username}) }}">{{  app.user.username }}</a></h4>#}
-                                {#<div class="">#}
-                                {% form_theme form 'bootstrap_3_layout.html.twig' %}
-                                {#{{ form_start(form) }}#}
-                                {{ form_label(form.content) }}
-                                {{ form_widget(form.content)}}
-                                {{ form_errors(form.content) }}
-                                {#{{ form_widget(form) }}#}
-                                <div class="pull-right">
-                                    <button type="submit" class="btn btn-default mt-3">post</button>
+                        {% if not isOwner %}
+                            <div class="media">
+                                <a class="media-left mr-2" href="#">
+                                    <img class="img-rounded" src="{{ asset('assets/img/' ~ app.user.avatar) }}" style="width: 64px; height: 64px;">
+                                </a>
+                                <div class="media-body">
+                                    {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                                    {{ form_label(form.content) }}
+                                    {{ form_widget(form.content)}}
+                                    {{ form_errors(form.content) }}
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-default mt-3">post</button>
+                                    </div>
+                                    {{ form_end(form) }}
                                 </div>
-                                {{ form_end(form) }}
-
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                     <hr>
 
                     {# ADVICE #}
                     {% include 'shout/_advice.html.twig' %}
+
+                    {% if isOwner %}
+                        <div class="media">
+                            <a class="media-left mr-2" href="#">
+                                <img class="img-rounded" src="{{ asset('assets/img/' ~ app.user.avatar) }}" style="width: 64px; height: 64px;">
+                            </a>
+                            <div class="media-body">
+                                {% form_theme form 'bootstrap_3_layout.html.twig' %}
+                                {{ form_label(form.content, 'Comment') }}
+                                {{ form_widget(form.content, {attr: {placeholder: 'Reply to them'}}) }}
+                                {{ form_errors(form.content) }}
+                                <div class="pull-right">
+                                    <button type="submit" class="btn btn-default mt-3">post</button>
+                                </div>
+                                {{ form_end(form) }}
+                            </div>
+                        </div>
+                    {% endif %}
 
             </div>
 
