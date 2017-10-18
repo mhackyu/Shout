@@ -1,17 +1,15 @@
 <h3>Welcome, New Shoutee!</h3>
-{#<h3>You did it! You registered!</h3>#}
-
+<br>
 Hi {{ name }},
 <br>
+
 You're successfully registered. To continue, please confirm your email address by clicking the link below
-
 <br>
-{# example, assuming you have a route named "login" #}
-<a class="btn btn-primary btn-round" href="{{ url('registration_confirm', {confirmationToken: token}) }}">Confirm Email address</a>.
 
+<a class="btn btn-primary btn-round" href="{{ url('registration_confirm', {confirmationToken: token}) }}">Confirm Email address</a>.
 <br><br>
+
 Thanks,
 Team Shout
-
 {# Makes an absolute URL to the /images/logo.png file #}
 <img src="{{ absolute_url(asset('assets/img/apple-icon.png')) }}">
