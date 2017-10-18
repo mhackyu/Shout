@@ -73,27 +73,22 @@ class ProfileController extends Controller
 
     /**
      * @Route("/profile", name="my_profile_show")
-     * TODO: PLEASE FIX PLAINPASSWORD BUG.
      */
     public function profileAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        // In-add ko lang to kasi vinavalidate nya na dapat ndi empty si plainpassword.
+        $user->setPlainPassword("dummy-data");
         $form = $this->createForm(ProfileFormType::class, $user);
         if ($request->isMethod("POST")) {
-//            $user->setPlainPassword($form->get('oldPlainPassword')->getData());
             $form->handleRequest($request);
-//            dump($user);
 
-            dump($user);
             if ($form->isSubmitted() && $form->isValid()) {
-//                $encodedPass = $this->get('security.password_encoder')
-//                    ->encodePassword($user, $user->getPlainPassword());
-//                $user->setPassword($encodedPass);
-//            $em->flush();
+                $em = $this->getDoctrine()->getManager();
+                $em->flush();
                 $this->addFlash("success", "Your profile was successfully updated.");
 
-                return $this->redirectToRoute('my_profile_show');
+                return $this->redirectToRoute('profile_me');
             }
             else {
                 $this->addFlash("danger", "Failed to update your profile.");
