@@ -44,7 +44,7 @@ class ShoutController extends Controller
             $request->query->getInt('page', 1),
             $request->query->getInt('limit', 6)
         );
-        dump($results);
+//        dump($results);
         $shout = new Shout();
         $form = $this->createForm(ShoutType::class, $shout);
 

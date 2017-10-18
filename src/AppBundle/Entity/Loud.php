@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\LoudRepository")
@@ -27,11 +28,13 @@ class Loud
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shout", inversedBy="loud")
      * @ORM\JoinColumn(onDelete="cascade")
+     * @Assert\Valid()
      */
     private $shout;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="loud")
+     * @Assert\Valid()
      */
     private $user;
 

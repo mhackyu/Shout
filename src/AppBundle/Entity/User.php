@@ -65,10 +65,11 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
      */
     private $enabled;
 
-    /**
-     * @ORM\Column(name="is_active", type="boolean")
-     */
-    private $isActive;
+//    /**
+//     * @ORM\Column(name="is_active", type="boolean")
+//     */
+//    private $isActive;
+
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
@@ -151,7 +152,7 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
 
     public function __construct()
     {
-        $this->isActive = true;
+//        $this->isActive = true;
         $this->enabled = false;
         $this->shout = new ArrayCollection();
         $this->love = new ArrayCollection();
@@ -272,29 +273,29 @@ class User implements UserInterface, \Serializable, AdvancedUserInterface
         return $this->email;
     }
 
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return User
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
-
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
+//    /**
+//     * Set isActive
+//     *
+//     * @param boolean $isActive
+//     *
+//     * @return User
+//     */
+//    public function setIsActive($isActive)
+//    {
+//        $this->isActive = $isActive;
+//
+//        return $this;
+//    }
+//
+//    /**
+//     * Get isActive
+//     *
+//     * @return boolean
+//     */
+//    public function getIsActive()
+//    {
+//        return $this->isActive;
+//    }
 
     /**
      * @return mixed

@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\QuoteRepository")
@@ -25,11 +26,15 @@ class Quote
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3")
      */
     private $content;
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3")
      */
     private $quoteBy;
 
@@ -45,6 +50,7 @@ class Quote
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\QuoteCategory", inversedBy="quote")
+     * @Assert\Valid()
      */
     private $category;
 

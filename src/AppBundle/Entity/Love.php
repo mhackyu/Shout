@@ -13,6 +13,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -30,11 +31,13 @@ class Love
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shout", inversedBy="love")
      * @ORM\JoinColumn(onDelete="cascade")
+     * @Assert\Valid()
      */
     private $shout;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="love")
+     * @Assert\Valid()
      */
     private $user;
 

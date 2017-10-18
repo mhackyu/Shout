@@ -12,6 +12,7 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -29,11 +30,14 @@ class QuoteCategory
 
     /**
      * @ORM\Column(type="string")
+     * @Assert\NotBlank()
+     * @Assert\Length(min="3", max="100")
      */
     private $name;
 
     /**
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Quote", mappedBy="category")
+     * @Assert\Valid()
      */
     private $quote;
 

@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -27,11 +28,13 @@ class FoundHelpful
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Advice", inversedBy="foundHelpful")
      * @ORM\JoinColumn(onDelete="cascade")
+     * @Assert\Valid()
      */
     private $advice;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="foundHelpful")
+     * @Assert\Valid()
      */
     private $user;
 
