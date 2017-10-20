@@ -16,17 +16,25 @@ class NotificationController extends Controller
         $em = $this->getDoctrine()->getManager();
         $notifications = $em->getRepository('AppBundle:Notification')->findBy(
             [
-                'user' => $this->getUser()
+                'user' => $this->getUser(),
             ],
             [
-                'createdAt' => "DESC"
+                'createdAt' => "DESC",
+//                'seen' => "ASC"
             ],
             5
         );
 
+        $notificationCount = count($em->getRepository('AppBundle:Notification')->findBy(
+            [
+                'user' => $this->getUser(),
+                'seen' => false
+            ]
+        )   );
+
         return $this->render('notifications/overview.html.twig', [
             'notifications' => $notifications,
-            'notication_count' => count($notifications)
+            'notication_count' => $notificationCount
         ]);
     }
 
