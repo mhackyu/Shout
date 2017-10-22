@@ -119,10 +119,14 @@ class ShoutController extends Controller
             // This will get all badwords from database.
             $badWords = $em->getRepository('AppBundle:BadWords')
                 ->getAllBadWords();
+//            dump($badWords);die;
             $checkInDB = new Check($badWords);
             $hasProfanityInDB = $checkInDB->hasProfanity($advice->getContent());
+//            dump($badWords);die;
             $checkNative = new Check();
             $hasProfanityInNative = $checkNative->hasProfanity($advice->getContent());
+//            $hasProfanityInDB = false;
+//            $hasProfanityInNative = false;
             if ($hasProfanityInDB or $hasProfanityInNative) {
                 $this->addFlash('danger', "Your advice contains bad words that can hurt and offend the shoutee. Please be mindful to the feelings of your fellow shoutee.");
                 $this->get('session')->set('adv', $advice->getContent());

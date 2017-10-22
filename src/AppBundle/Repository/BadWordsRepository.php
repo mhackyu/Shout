@@ -27,7 +27,7 @@ class BadWordsRepository extends EntityRepository
                 FROM AppBundle:BadWords bw
             ')
             ->getResult();
-        $words = [];
+        $words = array();
         foreach ($results as $result) {
             $words [] = $result["word"];
         }

@@ -31,7 +31,7 @@
                 </li>
                 {{ render(controller('AppBundle:Notification:notificationOverview')) }}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username }}</a>
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username|slice(0,6) }}..</a>
                     <ul class="dropdown-menu dropdown-menu-right dropdown-danger">
                         <li class="dropdown-header">Account</li>
                         <li class="dropdown-item"><a href="{{ path('profile_me') }}"><i class="fa fa-user"></i>My Profile</a></li>

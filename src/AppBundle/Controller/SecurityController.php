@@ -116,13 +116,17 @@ class SecurityController extends Controller
     {
 
         $em = $this->getDoctrine()->getManager();
+        $avatarFilename = $user->getAvatar();
+        $user->setAvatar($this->getParameter('app.avatar_dir') . "/" . $avatarFilename);
         $form = $this->createForm(PasswordResetType::class, $user);
+//        $form->remove('avatar');
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $encodedPass = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($encodedPass);
+            $user->setAvatar($avatarFilename);
             $user->setPasswordResetToken("");
             $em->flush();
             $this->addFlash("success", "Password successfully reset.");
